@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>儿童疫苗接种指南 - 深圳社康</title>
+  <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div class="app">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-content">
+        <div class="logo">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z"/>
+            <path d="M2 17l10 5 10-5"/>
+            <path d="M2 12l10 5 10-5"/>
+          </svg>
+          <span>疫苗接种指南</span>
+        </div>
+        <div class="header-badge">深圳社康</div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="hero-content">
+        <h1>宝宝该打什么疫苗？</h1>
+        <p class="hero-subtitle">输入宝宝月龄，获取个性化接种建议</p>
+
+        <div class="age-selector">
+          <div class="age-input-group">
+            <input type="number" id="ageInput" min="0" max="72" value="2" placeholder="月龄">
+            <span class="age-unit">月龄</span>
+          </div>
+          <input type="range" id="ageSlider" min="0" max="72" value="2" class="age-slider">
+          <div class="age-labels">
+            <span>出生</span>
+            <span>1岁</span>
+            <span>2岁</span>
+            <span>3岁</span>
+            <span>4岁</span>
+            <span>5岁</span>
+            <span>6岁</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Current Vaccines -->
+    <section class="section" id="currentSection">
+      <div class="section-header">
+        <h2>
+          <span class="section-icon">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 6v6l4 2"/>
+            </svg>
+          </span>
+          当前应接种
+        </h2>
+        <span class="age-display" id="currentAgeDisplay">2月龄</span>
+      </div>
+      <div class="vaccine-grid" id="currentVaccines">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- Navigation Tabs -->
+    <nav class="tabs">
+      <button class="tab active" data-tab="timeline">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="12" y1="20" x2="12" y2="10"/>
+          <line x1="18" y1="20" x2="18" y2="4"/>
+          <line x1="6" y1="20" x2="6" y2="16"/>
+        </svg>
+        接种时间轴
+      </button>
+      <button class="tab" data-tab="compare">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="3" width="18" height="18" rx="2"/>
+          <line x1="12" y1="3" x2="12" y2="21"/>
+        </svg>
+        免费 vs 自费
+      </button>
+      <button class="tab" data-tab="all">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <line x1="8" y1="6" x2="21" y2="6"/>
+          <line x1="8" y1="12" x2="21" y2="12"/>
+          <line x1="8" y1="18" x2="21" y2="18"/>
+          <line x1="3" y1="6" x2="3.01" y2="6"/>
+          <line x1="3" y1="12" x2="3.01" y2="12"/>
+          <line x1="3" y1="18" x2="3.01" y2="18"/>
+        </svg>
+        全部疫苗
+      </button>
+    </nav>
+
+    <!-- Tab Content -->
+    <main class="main-content">
+      <!-- Timeline View -->
+      <section class="tab-content active" id="timeline">
+        <div class="timeline-container">
+          <div class="timeline-header">
+            <div class="timeline-legend">
+              <span class="legend-item"><span class="dot free"></span>免费疫苗</span>
+              <span class="legend-item"><span class="dot paid"></span>自费推荐</span>
+              <span class="legend-item"><span class="dot optional"></span>可选</span>
+            </div>
+          </div>
+          <div class="timeline" id="timelineView">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Compare View -->
+      <section class="tab-content" id="compare">
+        <div class="compare-container">
+          <div class="compare-column free-column">
+            <div class="compare-header">
+              <h3>免费疫苗</h3>
+              <span class="badge free">国家免疫规划</span>
+            </div>
+            <div class="compare-list" id="freeVaccinesList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+          <div class="compare-divider">
+            <span>VS</span>
+          </div>
+          <div class="compare-column paid-column">
+            <div class="compare-header">
+              <h3>自费疫苗</h3>
+              <span class="badge paid">自愿接种</span>
+            </div>
+            <div class="compare-list" id="paidVaccinesList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Vaccine Groups Comparison -->
+        <div class="groups-section">
+          <h3>替代关系对比</h3>
+          <div class="groups-grid" id="vaccineGroups">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+      </section>
+
+      <!-- All Vaccines View -->
+      <section class="tab-content" id="all">
+        <div class="filter-bar">
+          <div class="search-box">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"/>
+              <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+            </svg>
+            <input type="text" id="searchInput" placeholder="搜索疫苗名称或预防疾病...">
+          </div>
+          <div class="filter-chips" id="categoryFilters">
+            <button class="chip active" data-category="all">全部</button>
+            <!-- Dynamically add category chips -->
+          </div>
+        </div>
+        <div class="vaccine-table-container">
+          <table class="vaccine-table" id="allVaccinesTable">
+            <thead>
+              <tr>
+                <th>疫苗名称</th>
+                <th>类型</th>
+                <th>预防疾病</th>
+                <th>接种剂次</th>
+                <th>参考价格</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="allVaccinesBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+
+    <!-- Tips Section -->
+    <section class="tips-section" id="tipsSection">
+      <h3>接种小贴士</h3>
+      <div class="tips-grid" id="tipsGrid">
+        <!-- Dynamically populated -->
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer-content">
+        <p class="disclaimer">
+          本页面信息仅供参考，具体接种方案请咨询当地社康中心或医生。
+          <br>数据来源：深圳市卫健委、广东省非免疫规划疫苗接种方案（2024版）、国家免疫规划疫苗儿童免疫程序（2021版）
+        </p>
+        <div class="footer-links">
+          <a href="https://wjw.sz.gov.cn/ztzl/ymjz/" target="_blank">深圳卫健委</a>
+          <span class="divider">·</span>
+          <a href="https://www.chinacdc.cn/" target="_blank">中国疾控中心</a>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal" id="vaccineModal">
+        <button class="modal-close" id="modalClose">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <div class="modal-content" id="modalContent">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
