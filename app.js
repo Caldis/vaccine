@@ -50,10 +50,11 @@ class VaccineGuide {
     // Age input and slider
     const ageInput = document.getElementById('ageInput');
     const ageSlider = document.getElementById('ageSlider');
+    const maxAge = 162;
 
     ageInput.addEventListener('input', (e) => {
       let value = parseInt(e.target.value) || 0;
-      value = Math.max(0, Math.min(72, value));
+      value = Math.max(0, Math.min(maxAge, value));
       this.currentAge = value;
       ageSlider.value = value;
       this.updateCurrentVaccines();
@@ -104,6 +105,12 @@ class VaccineGuide {
       ageInput.value = this.currentAge;
       ageSlider.value = this.currentAge;
     }
+  }
+
+  getPriceLabel(vaccine, withUnit = true) {
+    if (vaccine.type === 'free') return '免费';
+    if (vaccine.price === null || vaccine.price === undefined) return '价格待确认';
+    return withUnit ? `¥${vaccine.price}/剂` : `¥${vaccine.price}`;
   }
 
   switchTab(tabId) {
@@ -206,7 +213,7 @@ class VaccineGuide {
   renderVaccineCard(vaccine) {
     const typeClass = vaccine.type === 'free' ? 'free' : 'paid';
     const typeLabel = vaccine.type === 'free' ? '免费' : '自费';
-    const price = vaccine.type === 'free' ? '免费' : `¥${vaccine.price}/剂`;
+    const price = this.getPriceLabel(vaccine, true);
 
     return `
       <div class="vaccine-card ${typeClass}" data-id="${vaccine.id}">
@@ -324,7 +331,7 @@ class VaccineGuide {
       <div class="compare-item" data-id="${v.id}">
         <div class="compare-item-name">${v.name}</div>
         <div class="compare-item-diseases">${v.diseases.join('、')}</div>
-        <div class="compare-item-price">¥${v.price}/剂 · ${v.totalDoses}剂次</div>
+        <div class="compare-item-price">${this.getPriceLabel(v, true)} · ${v.totalDoses}剂次</div>
       </div>
     `).join('');
 
@@ -404,7 +411,7 @@ class VaccineGuide {
     tbody.innerHTML = vaccines.map(v => {
       const typeClass = v.type === 'free' ? 'free' : 'paid';
       const typeLabel = v.type === 'free' ? '免费' : '自费';
-      const price = v.type === 'free' ? '免费' : `¥${v.price}`;
+      const price = this.getPriceLabel(v, false);
 
       return `
         <tr>
@@ -448,7 +455,10 @@ class VaccineGuide {
 
     const typeClass = vaccine.type === 'free' ? 'free' : 'paid';
     const typeLabel = vaccine.type === 'free' ? '免费疫苗' : '自费疫苗';
-    const priceDisplay = vaccine.type === 'free' ? '免费' : `¥${vaccine.price}`;
+    const priceDisplay = this.getPriceLabel(vaccine, false);
+    const totalPrice = vaccine.price === null || vaccine.price === undefined
+      ? null
+      : `全程${vaccine.totalDoses}剂，约需 ¥${vaccine.price * vaccine.totalDoses}`;
 
     // Find alternatives
     const alternatives = vaccine.replaces
@@ -492,7 +502,7 @@ class VaccineGuide {
       <div class="modal-section">
         <h3 class="modal-section-title">参考价格</h3>
         <div class="modal-price ${typeClass}">${priceDisplay}</div>
-        ${vaccine.type === 'paid' ? `<p class="modal-price-note">全程${vaccine.totalDoses}剂，约需 ¥${vaccine.price * vaccine.totalDoses}</p>` : ''}
+        ${vaccine.type === 'paid' && totalPrice ? `<p class="modal-price-note">${totalPrice}</p>` : ''}
       </div>
 
       <div class="modal-section">
