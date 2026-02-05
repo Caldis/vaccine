@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>儿童疫苗接种指南 - 深圳社康</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="styles.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,7 +12,6 @@
 </head>
 <body>
   <div class="app">
-    <!-- Header -->
     <header class="header">
       <div class="header-content">
         <div class="logo">
@@ -20,22 +20,30 @@
             <path d="M2 17l10 5 10-5"/>
             <path d="M2 12l10 5 10-5"/>
           </svg>
-          <span>疫苗接种指南</span>
+          <span data-i18n="logoTitle">疫苗接种指南</span>
         </div>
-        <div class="header-badge">深圳社康</div>
+        <div class="header-actions">
+          <label class="lang-switch" for="languageSelect">
+            <span data-i18n="languageLabel">语言</span>
+            <select id="languageSelect" aria-label="Language">
+              <option value="zh">中文</option>
+              <option value="en">English</option>
+            </select>
+          </label>
+          <button class="theme-toggle" id="themeToggle" type="button" data-i18n="themeToggle">暗黑模式</button>
+          <div class="header-badge" data-i18n="headerBadge">深圳社康</div>
+        </div>
       </div>
     </header>
 
-    <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
-        <h1>宝宝该打什么疫苗？</h1>
-        <p class="hero-subtitle">按月龄查看推荐接种项，快速找到当月重点疫苗</p>
-        <button class="primary-btn" id="openAgeModal">查看月龄推荐</button>
+        <h1 data-i18n="heroTitle">宝宝该打什么疫苗？</h1>
+        <p class="hero-subtitle" data-i18n="heroSubtitle">按月龄查看推荐接种项，快速找到当月重点疫苗</p>
+        <button class="primary-btn" id="openAgeModal" data-i18n="heroButton">查看月龄推荐</button>
       </div>
     </section>
 
-    <!-- Navigation Tabs -->
     <nav class="tabs">
       <button class="tab active" data-tab="timeline">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -43,14 +51,14 @@
           <line x1="18" y1="20" x2="18" y2="4"/>
           <line x1="6" y1="20" x2="6" y2="16"/>
         </svg>
-        接种时间轴
+        <span data-i18n="tabTimeline">接种时间轴</span>
       </button>
       <button class="tab" data-tab="compare">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="3" y="3" width="18" height="18" rx="2"/>
           <line x1="12" y1="3" x2="12" y2="21"/>
         </svg>
-        免费 vs 自费
+        <span data-i18n="tabCompare">免费 vs 自费</span>
       </button>
       <button class="tab" data-tab="all">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -61,67 +69,50 @@
           <line x1="3" y1="12" x2="3.01" y2="12"/>
           <line x1="3" y1="18" x2="3.01" y2="18"/>
         </svg>
-        全部疫苗
+        <span data-i18n="tabAll">全部疫苗</span>
       </button>
     </nav>
 
-    <!-- Tab Content -->
     <main class="main-content">
-      <!-- Timeline View -->
       <section class="tab-content active" id="timeline">
         <div class="timeline-container">
           <div class="timeline-header">
             <div class="timeline-legend">
-              <span class="legend-item"><span class="dot free"></span>免费疫苗</span>
-              <span class="legend-item"><span class="dot paid"></span>自费推荐</span>
-              <span class="legend-item"><span class="dot optional"></span>可选</span>
+              <span class="legend-item"><span class="dot free"></span><span data-i18n="legendFree">免费疫苗</span></span>
+              <span class="legend-item"><span class="dot paid"></span><span data-i18n="legendPaid">自费推荐</span></span>
+              <span class="legend-item"><span class="dot optional"></span><span data-i18n="legendOptional">可选</span></span>
             </div>
-            <div class="selection-summary" id="selectionSummary">
-              <!-- Dynamically populated -->
-            </div>
+            <div class="selection-summary" id="selectionSummary"></div>
           </div>
-          <div class="timeline" id="timelineView">
-            <!-- Dynamically populated -->
-          </div>
+          <div class="timeline" id="timelineView"></div>
         </div>
       </section>
 
-      <!-- Compare View -->
       <section class="tab-content" id="compare">
         <div class="compare-container">
           <div class="compare-column free-column">
             <div class="compare-header">
-              <h3>免费疫苗</h3>
-              <span class="badge free">国家免疫规划</span>
+              <h3 data-i18n="compareFree">免费疫苗</h3>
+              <span class="badge free" data-i18n="compareFreeBadge">国家免疫规划</span>
             </div>
-            <div class="compare-list" id="freeVaccinesList">
-              <!-- Dynamically populated -->
-            </div>
+            <div class="compare-list" id="freeVaccinesList"></div>
           </div>
-          <div class="compare-divider">
-            <span>VS</span>
-          </div>
+          <div class="compare-divider"><span>VS</span></div>
           <div class="compare-column paid-column">
             <div class="compare-header">
-              <h3>自费疫苗</h3>
-              <span class="badge paid">自愿接种</span>
+              <h3 data-i18n="comparePaid">自费疫苗</h3>
+              <span class="badge paid" data-i18n="comparePaidBadge">自愿接种</span>
             </div>
-            <div class="compare-list" id="paidVaccinesList">
-              <!-- Dynamically populated -->
-            </div>
+            <div class="compare-list" id="paidVaccinesList"></div>
           </div>
         </div>
 
-        <!-- Vaccine Groups Comparison -->
         <div class="groups-section">
-          <h3>替代关系对比</h3>
-          <div class="groups-grid" id="vaccineGroups">
-            <!-- Dynamically populated -->
-          </div>
+          <h3 data-i18n="groupsTitle">替代关系对比</h3>
+          <div class="groups-grid" id="vaccineGroups"></div>
         </div>
       </section>
 
-      <!-- All Vaccines View -->
       <section class="tab-content" id="all">
         <div class="filter-bar">
           <div class="search-box">
@@ -129,57 +120,49 @@
               <circle cx="11" cy="11" r="8"/>
               <line x1="21" y1="21" x2="16.65" y2="16.65"/>
             </svg>
-            <input type="text" id="searchInput" placeholder="搜索疫苗名称或预防疾病...">
+            <input type="text" id="searchInput" data-i18n-placeholder="searchPlaceholder" placeholder="搜索疫苗名称或预防疾病...">
           </div>
           <div class="filter-chips" id="categoryFilters">
-            <button class="chip active" data-category="all">全部</button>
-            <!-- Dynamically add category chips -->
+            <button class="chip active" data-category="all" data-i18n="allCategory">全部</button>
           </div>
         </div>
         <div class="vaccine-table-container">
           <table class="vaccine-table" id="allVaccinesTable">
             <thead>
               <tr>
-                <th>疫苗名称</th>
-                <th>类型</th>
-                <th>预防疾病</th>
-                <th>接种剂次</th>
-                <th>参考价格</th>
+                <th data-i18n="thName">疫苗名称</th>
+                <th data-i18n="thType">类型</th>
+                <th data-i18n="thDisease">预防疾病</th>
+                <th data-i18n="thDose">接种剂次</th>
+                <th data-i18n="thPrice">参考价格</th>
                 <th></th>
               </tr>
             </thead>
-            <tbody id="allVaccinesBody">
-              <!-- Dynamically populated -->
-            </tbody>
+            <tbody id="allVaccinesBody"></tbody>
           </table>
         </div>
       </section>
     </main>
 
-    <!-- Tips Section -->
     <section class="tips-section" id="tipsSection">
-      <h3>接种小贴士</h3>
-      <div class="tips-grid" id="tipsGrid">
-        <!-- Dynamically populated -->
-      </div>
+      <h3 data-i18n="tipsTitle">接种小贴士</h3>
+      <div class="tips-grid" id="tipsGrid"></div>
     </section>
 
-    <!-- Footer -->
     <footer class="footer">
       <div class="footer-content">
-        <p class="disclaimer">
-          本页面信息仅供参考，具体接种方案请咨询当地社康中心或医生。
-          <br>数据来源：深圳市卫健委、广东省非免疫规划疫苗接种方案（2024版）、国家免疫规划疫苗儿童免疫程序（2021版）
+        <p class="disclaimer" data-i18n="footerDisclaimer">
+          本页面信息仅供参考，具体接种方案请咨询当地社康中心或医生。<br>
+          数据来源：深圳市卫健委、广东省非免疫规划疫苗接种方案（2024版）、国家免疫规划疫苗儿童免疫程序（2021版）
         </p>
         <div class="footer-links">
-          <a href="https://wjw.sz.gov.cn/ztzl/ymjz/" target="_blank">深圳卫健委</a>
+          <a href="https://wjw.sz.gov.cn/ztzl/ymjz/" target="_blank" data-i18n="linkShenzhen">深圳卫健委</a>
           <span class="divider">·</span>
-          <a href="https://www.chinacdc.cn/" target="_blank">中国疾控中心</a>
+          <a href="https://www.chinacdc.cn/" target="_blank" data-i18n="linkCdc">中国疾控中心</a>
         </div>
       </div>
     </footer>
 
-    <!-- Modal -->
     <div class="modal-overlay" id="modalOverlay">
       <div class="modal" id="vaccineModal">
         <button class="modal-close" id="modalClose">
@@ -188,13 +171,10 @@
             <line x1="6" y1="6" x2="18" y2="18"/>
           </svg>
         </button>
-        <div class="modal-content" id="modalContent">
-          <!-- Dynamically populated -->
-        </div>
+        <div class="modal-content" id="modalContent"></div>
       </div>
     </div>
 
-    <!-- Age Modal -->
     <div class="modal-overlay" id="ageModalOverlay">
       <div class="modal modal-wide" id="ageModal">
         <button class="modal-close" id="ageModalClose">
@@ -205,13 +185,13 @@
         </button>
         <div class="modal-content">
           <div class="age-modal-header">
-            <h2>月龄推荐</h2>
-            <p>输入宝宝月龄，查看当月应接种疫苗</p>
+            <h2 data-i18n="ageModalTitle">月龄推荐</h2>
+            <p data-i18n="ageModalSubtitle">输入宝宝月龄，查看当月应接种疫苗</p>
           </div>
           <div class="age-selector">
             <div class="age-input-group">
-              <input type="number" id="ageInput" min="0" max="162" value="2" placeholder="月龄">
-              <span class="age-unit">月龄</span>
+              <input type="number" id="ageInput" min="0" max="162" value="2" data-i18n-placeholder="agePlaceholder" placeholder="月龄">
+              <span class="age-unit" data-i18n="ageUnit">月龄</span>
             </div>
           </div>
           <section class="section age-modal-section" id="currentSection">
@@ -223,13 +203,11 @@
                     <path d="M12 6v6l4 2"/>
                   </svg>
                 </span>
-                当前应接种
+                <span data-i18n="currentSectionTitle">当前应接种</span>
               </h2>
               <span class="age-display" id="currentAgeDisplay">2月龄</span>
             </div>
-            <div class="vaccine-grid" id="currentVaccines">
-              <!-- Dynamically populated -->
-            </div>
+            <div class="vaccine-grid" id="currentVaccines"></div>
           </section>
         </div>
       </div>

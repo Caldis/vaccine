@@ -1324,3 +1324,146 @@ body {
 .empty-state p {
   font-size: 14px;
 }
+
+/* Theme + utility controls */
+[data-theme='dark'] {
+  --background: #0b0d10;
+  --background-secondary: #12161b;
+  --foreground: #f4f4f5;
+  --foreground-secondary: #b5bcc6;
+  --foreground-tertiary: #8a94a3;
+  --border: #262c36;
+  --border-hover: #4a5568;
+  --accent-free-light: rgba(0, 112, 243, 0.18);
+  --accent-paid-light: rgba(245, 166, 35, 0.16);
+  --accent-success-light: rgba(12, 206, 107, 0.14);
+  --accent-error-light: rgba(238, 0, 0, 0.18);
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --shadow-md: 0 6px 14px rgba(0, 0, 0, 0.28);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.42);
+}
+
+[data-theme='dark'] .hero h1 {
+  background: linear-gradient(180deg, #fff 0%, #b5bcc6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+[data-theme='dark'] .header {
+  background: rgba(11, 13, 16, 0.88);
+}
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  color: var(--foreground-secondary);
+}
+
+.lang-switch select,
+.theme-toggle {
+  border: 1px solid var(--border);
+  background: var(--background);
+  color: var(--foreground);
+  border-radius: var(--radius-md);
+  padding: 6px 10px;
+  font-size: 12px;
+}
+
+.theme-toggle {
+  cursor: pointer;
+}
+
+@media (max-width: 768px) {
+  .header-content {
+    height: auto;
+    min-height: 64px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .header-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .header-badge {
+    display: none;
+  }
+
+  .hero {
+    padding: 42px 16px 30px;
+  }
+
+  .main-content,
+  .tabs,
+  .section,
+  .footer {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .timeline {
+    padding: 12px;
+  }
+
+  .timeline-row {
+    flex-direction: column;
+    gap: 4px;
+    padding: 8px 0;
+  }
+
+  .timeline-age,
+  .timeline-age.current {
+    width: 100%;
+    border-right: none;
+    border-radius: var(--radius-sm);
+    padding: 8px 10px;
+    margin: 0;
+  }
+
+  .timeline-vaccines {
+    padding: 4px 0;
+  }
+
+  .filter-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .search-box {
+    width: 100%;
+  }
+
+  .search-box input {
+    width: 100%;
+  }
+
+  .selection-actions {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .compare-column {
+    padding: 16px;
+  }
+
+  .modal-overlay {
+    padding: 0;
+    align-items: flex-end;
+  }
+
+  .modal {
+    border-radius: 16px 16px 0 0;
+  }
+}
