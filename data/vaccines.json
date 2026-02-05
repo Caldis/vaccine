@@ -5,9 +5,15 @@
       "name": "卡介苗",
       "nameEn": "BCG",
       "type": "free",
-      "diseases": ["结核病"],
+      "diseases": [
+        "结核病"
+      ],
       "schedule": [
-        {"ageMonths": 0, "dose": 1, "note": "出生时接种"}
+        {
+          "ageMonths": 0,
+          "dose": 1,
+          "note": "出生时接种"
+        }
       ],
       "totalDoses": 1,
       "price": 0,
@@ -19,40 +25,73 @@
     },
     {
       "id": "hepb",
-      "name": "乙肝疫苗",
+      "name": "乙肝(酿酒酵母)",
       "nameEn": "Hepatitis B",
       "type": "free",
-      "diseases": ["乙型肝炎"],
+      "diseases": [
+        "乙型肝炎"
+      ],
       "schedule": [
-        {"ageMonths": 0, "dose": 1, "note": "出生24小时内"},
-        {"ageMonths": 1, "dose": 2, "note": "1月龄"},
-        {"ageMonths": 6, "dose": 3, "note": "6月龄"}
+        {
+          "ageMonths": 0,
+          "dose": 1,
+          "note": "出生24小时内"
+        },
+        {
+          "ageMonths": 1,
+          "dose": 2,
+          "note": "1月龄"
+        },
+        {
+          "ageMonths": 6,
+          "dose": 3,
+          "note": "6月龄"
+        }
       ],
       "totalDoses": 3,
       "price": 0,
       "description": "预防乙型肝炎病毒感染，避免发展为慢性肝炎、肝硬化和肝癌。",
       "sideEffects": "可能有轻微发热、接种部位红肿，通常1-2天自行消退。",
       "recommendations": "必须接种。第1剂应在出生后24小时内尽早接种。",
-      "alternatives": ["hepb_cho", "hepb_yeast"],
+      "alternatives": [
+        "hepb_cho",
+        "hepb_yeast"
+      ],
       "category": "肝炎"
     },
     {
       "id": "hepb_cho",
-      "name": "乙肝疫苗(CHO细胞)",
+      "name": "乙肝(CHO细胞)",
       "nameEn": "Hepatitis B (CHO)",
       "type": "paid",
-      "diseases": ["乙型肝炎"],
+      "diseases": [
+        "乙型肝炎"
+      ],
       "schedule": [
-        {"ageMonths": 0, "dose": 1, "note": "出生24小时内"},
-        {"ageMonths": 1, "dose": 2, "note": "1月龄"},
-        {"ageMonths": 6, "dose": 3, "note": "6月龄"}
+        {
+          "ageMonths": 0,
+          "dose": 1,
+          "note": "出生24小时内"
+        },
+        {
+          "ageMonths": 1,
+          "dose": 2,
+          "note": "1月龄"
+        },
+        {
+          "ageMonths": 6,
+          "dose": 3,
+          "note": "6月龄"
+        }
       ],
       "totalDoses": 3,
       "price": 149,
       "description": "CHO细胞培养的乙肝疫苗，抗原含量较高，免疫效果可能更持久。",
       "sideEffects": "与免费乙肝疫苗相似，偶有轻微发热和局部反应。",
       "recommendations": "可选。如果家庭经济允许，可选择接种。",
-      "replaces": ["hepb"],
+      "replaces": [
+        "hepb"
+      ],
       "category": "肝炎"
     },
     {
@@ -60,12 +99,30 @@
       "name": "脊灰灭活疫苗",
       "nameEn": "IPV",
       "type": "free",
-      "diseases": ["脊髓灰质炎(小儿麻痹)"],
+      "diseases": [
+        "脊髓灰质炎(小儿麻痹)"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄"},
-        {"ageMonths": 3, "dose": 2, "note": "3月龄"},
-        {"ageMonths": 4, "dose": 3, "note": "4月龄"},
-        {"ageMonths": 48, "dose": 4, "note": "4岁加强"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄"
+        },
+        {
+          "ageMonths": 3,
+          "dose": 2,
+          "note": "3月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 3,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 48,
+          "dose": 4,
+          "note": "4岁加强"
+        }
       ],
       "totalDoses": 4,
       "price": 0,
@@ -77,62 +134,140 @@
     },
     {
       "id": "dtap",
-      "name": "百白破疫苗",
+      "name": "百白破(无细胞)",
       "nameEn": "DTaP",
       "type": "free",
-      "diseases": ["百日咳", "白喉", "破伤风"],
-      "schedule": [
-        {"ageMonths": 3, "dose": 1, "note": "3月龄"},
-        {"ageMonths": 4, "dose": 2, "note": "4月龄"},
-        {"ageMonths": 5, "dose": 3, "note": "5月龄"},
-        {"ageMonths": 18, "dose": 4, "note": "18月龄加强"}
+      "diseases": [
+        "百日咳",
+        "白喉",
+        "破伤风"
       ],
-      "totalDoses": 4,
+      "schedule": [
+        {
+          "ageMonths": 3,
+          "dose": 1,
+          "note": "3月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 5,
+          "dose": 3,
+          "note": "5月龄"
+        },
+        {
+          "ageMonths": 18,
+          "dose": 4,
+          "note": "18月龄加强"
+        },
+        {
+          "ageMonths": 72,
+          "dose": 5,
+          "note": "6岁加强"
+        }
+      ],
+      "totalDoses": 5,
       "price": 0,
       "description": "预防百日咳、白喉、破伤风三种疾病的联合疫苗。",
       "sideEffects": "接种部位可能红肿、硬结，偶有发热，一般2-3天消退。",
-      "recommendations": "必须接种。可选择自费的四联或五联疫苗替代。",
-      "alternatives": ["dtap_hib", "dtap_ipv_hib"],
+      "recommendations": "按社康通排苗表在6岁追加第5剂加强。",
+      "alternatives": [
+        "dtap_hib",
+        "dtap_ipv_hib"
+      ],
       "category": "百白破"
     },
     {
       "id": "dtap_hib",
-      "name": "四联疫苗",
+      "name": "四联疫苗(百白破-Hib)",
       "nameEn": "DTaP-Hib",
       "type": "paid",
-      "diseases": ["百日咳", "白喉", "破伤风", "b型流感嗜血杆菌感染"],
+      "diseases": [
+        "百日咳",
+        "白喉",
+        "破伤风",
+        "b型流感嗜血杆菌感染"
+      ],
       "schedule": [
-        {"ageMonths": 3, "dose": 1, "note": "3月龄"},
-        {"ageMonths": 4, "dose": 2, "note": "4月龄"},
-        {"ageMonths": 5, "dose": 3, "note": "5月龄"},
-        {"ageMonths": 18, "dose": 4, "note": "18-24月龄加强"}
+        {
+          "ageMonths": 3,
+          "dose": 1,
+          "note": "3月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 5,
+          "dose": 3,
+          "note": "5月龄"
+        },
+        {
+          "ageMonths": 18,
+          "dose": 4,
+          "note": "18-24月龄加强"
+        }
       ],
       "totalDoses": 4,
       "price": 404,
       "description": "在百白破基础上增加Hib成分，预防4种疾病。需另外接种脊灰疫苗。",
       "sideEffects": "与百白破类似，可能有局部反应和轻微发热。",
       "recommendations": "推荐接种。比免费百白破多预防Hib感染，性价比较高。",
-      "replaces": ["dtap", "hib"],
+      "replaces": [
+        "dtap",
+        "hib"
+      ],
       "category": "百白破"
     },
     {
       "id": "dtap_ipv_hib",
-      "name": "五联疫苗",
+      "name": "五联疫苗(百白破-脊灰-Hib)",
       "nameEn": "DTaP-IPV-Hib",
       "type": "paid",
-      "diseases": ["百日咳", "白喉", "破伤风", "脊髓灰质炎", "b型流感嗜血杆菌感染"],
+      "diseases": [
+        "百日咳",
+        "白喉",
+        "破伤风",
+        "脊髓灰质炎",
+        "b型流感嗜血杆菌感染"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄"},
-        {"ageMonths": 3, "dose": 2, "note": "3月龄"},
-        {"ageMonths": 4, "dose": 3, "note": "4月龄"},
-        {"ageMonths": 18, "dose": 4, "note": "18月龄加强"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄"
+        },
+        {
+          "ageMonths": 3,
+          "dose": 2,
+          "note": "3月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 3,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 18,
+          "dose": 4,
+          "note": "18月龄加强"
+        }
       ],
       "totalDoses": 4,
       "price": 631,
       "description": "一针预防5种疾病，相比分开接种可少打8针。进口疫苗，由赛诺菲巴斯德生产。",
       "sideEffects": "可能有发热、局部红肿，与单独疫苗类似，未增加不良反应风险。",
       "recommendations": "强烈推荐。WHO推荐使用联合疫苗，减少接种次数和宝宝痛苦。",
-      "replaces": ["dtap", "ipv", "hib"],
+      "replaces": [
+        "dtap",
+        "ipv",
+        "hib"
+      ],
       "category": "百白破"
     },
     {
@@ -140,30 +275,65 @@
       "name": "Hib疫苗",
       "nameEn": "Hib",
       "type": "paid",
-      "diseases": ["b型流感嗜血杆菌感染", "细菌性脑膜炎", "肺炎"],
+      "diseases": [
+        "b型流感嗜血杆菌感染",
+        "细菌性脑膜炎",
+        "肺炎"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄"},
-        {"ageMonths": 4, "dose": 2, "note": "4月龄"},
-        {"ageMonths": 6, "dose": 3, "note": "6月龄"},
-        {"ageMonths": 12, "dose": 4, "note": "12-15月龄加强"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 6,
+          "dose": 3,
+          "note": "6月龄"
+        },
+        {
+          "ageMonths": 12,
+          "dose": 4,
+          "note": "12-15月龄加强"
+        }
       ],
       "totalDoses": 4,
       "price": 144,
       "description": "预防b型流感嗜血杆菌引起的脑膜炎、肺炎、会厌炎等严重感染。90%以上侵袭性疾病发生在5岁以下儿童。",
       "sideEffects": "接种部位轻微红肿、疼痛，偶有低热。",
       "recommendations": "强烈推荐。WHO优先推荐的疫苗之一，建议所有儿童接种。如选择四联或五联可不单独接种。",
-      "alternatives": ["dtap_hib", "dtap_ipv_hib"],
+      "alternatives": [
+        "dtap_hib",
+        "dtap_ipv_hib"
+      ],
       "category": "Hib"
     },
     {
       "id": "mmr",
-      "name": "麻腮风疫苗",
+      "name": "麻腮风",
       "nameEn": "MMR",
       "type": "free",
-      "diseases": ["麻疹", "流行性腮腺炎", "风疹"],
+      "diseases": [
+        "麻疹",
+        "流行性腮腺炎",
+        "风疹"
+      ],
       "schedule": [
-        {"ageMonths": 8, "dose": 1, "note": "8月龄"},
-        {"ageMonths": 18, "dose": 2, "note": "18月龄加强"}
+        {
+          "ageMonths": 8,
+          "dose": 1,
+          "note": "8月龄"
+        },
+        {
+          "ageMonths": 18,
+          "dose": 2,
+          "note": "18月龄加强"
+        }
       ],
       "totalDoses": 2,
       "price": 0,
@@ -178,17 +348,29 @@
       "name": "乙脑减毒活疫苗",
       "nameEn": "JE-Live",
       "type": "free",
-      "diseases": ["流行性乙型脑炎"],
+      "diseases": [
+        "流行性乙型脑炎"
+      ],
       "schedule": [
-        {"ageMonths": 8, "dose": 1, "note": "8月龄"},
-        {"ageMonths": 24, "dose": 2, "note": "2岁加强"}
+        {
+          "ageMonths": 8,
+          "dose": 1,
+          "note": "8月龄"
+        },
+        {
+          "ageMonths": 24,
+          "dose": 2,
+          "note": "2岁加强"
+        }
       ],
       "totalDoses": 2,
       "price": 0,
       "description": "预防流行性乙型脑炎，该病由蚊虫传播，可导致严重脑损伤。",
       "sideEffects": "少数有轻微发热，极少数有过敏反应。",
       "recommendations": "必须接种。也可选择自费乙脑灭活疫苗替代。",
-      "alternatives": ["je_inact"],
+      "alternatives": [
+        "je_inact"
+      ],
       "category": "乙脑"
     },
     {
@@ -196,165 +378,216 @@
       "name": "乙脑灭活疫苗",
       "nameEn": "JE-Inactivated",
       "type": "paid",
-      "diseases": ["流行性乙型脑炎"],
+      "diseases": [
+        "流行性乙型脑炎"
+      ],
       "schedule": [
-        {"ageMonths": 8, "dose": 1, "note": "8月龄第1剂"},
-        {"ageMonths": 8, "dose": 2, "note": "8月龄第2剂(间隔7-10天)"},
-        {"ageMonths": 24, "dose": 3, "note": "2岁加强"},
-        {"ageMonths": 72, "dose": 4, "note": "6岁加强"}
+        {
+          "ageMonths": 8,
+          "dose": 1,
+          "note": "8月龄第1剂"
+        },
+        {
+          "ageMonths": 8,
+          "dose": 2,
+          "note": "8月龄第2剂(间隔7-10天)"
+        },
+        {
+          "ageMonths": 24,
+          "dose": 3,
+          "note": "2岁加强"
+        },
+        {
+          "ageMonths": 72,
+          "dose": 4,
+          "note": "6岁加强"
+        }
       ],
       "totalDoses": 4,
       "price": 252,
       "description": "灭活疫苗，需接种4剂。适合对减毒活疫苗有禁忌的儿童。",
       "sideEffects": "局部反应较轻，发热较少见。",
       "recommendations": "可选。免疫功能低下者建议选择灭活疫苗。",
-      "replaces": ["je_live"],
+      "replaces": [
+        "je_live"
+      ],
       "category": "乙脑"
     },
     {
       "id": "hepa_live",
-      "name": "甲肝减毒活疫苗",
+      "name": "甲肝(减毒)",
       "nameEn": "HepA-Live",
       "type": "free",
-      "diseases": ["甲型肝炎"],
+      "diseases": [
+        "甲型肝炎"
+      ],
       "schedule": [
-        {"ageMonths": 18, "dose": 1, "note": "18月龄"}
+        {
+          "ageMonths": 18,
+          "dose": 1,
+          "note": "18月龄"
+        }
       ],
       "totalDoses": 1,
       "price": 0,
       "description": "预防甲型肝炎病毒感染。甲肝主要通过消化道传播。",
       "sideEffects": "少数有轻微发热和局部反应。",
       "recommendations": "必须接种。也可选择自费甲肝灭活疫苗（需打2针）。",
-      "alternatives": ["hepa_inact"],
+      "alternatives": [
+        "hepa_inact"
+      ],
       "category": "肝炎"
     },
     {
       "id": "hepa_inact",
-      "name": "甲肝灭活疫苗",
+      "name": "甲肝(灭活)",
       "nameEn": "HepA-Inactivated",
       "type": "paid",
-      "diseases": ["甲型肝炎"],
+      "diseases": [
+        "甲型肝炎"
+      ],
       "schedule": [
-        {"ageMonths": 18, "dose": 1, "note": "18月龄"},
-        {"ageMonths": 24, "dose": 2, "note": "24-30月龄加强"}
+        {
+          "ageMonths": 12,
+          "dose": 1,
+          "note": "12月龄"
+        },
+        {
+          "ageMonths": 18,
+          "dose": 2,
+          "note": "18月龄"
+        }
       ],
       "totalDoses": 2,
       "price": 174,
       "description": "灭活疫苗，需接种2剂，保护期更长。",
       "sideEffects": "接种部位轻微疼痛，偶有低热。",
-      "recommendations": "可选。保护期比减毒活疫苗更长，免疫功能低下者建议选择。",
-      "replaces": ["hepa_live"],
+      "recommendations": "社康通排苗表为1岁和1岁6个月各接种1剂。",
+      "replaces": [
+        "hepa_live"
+      ],
       "category": "肝炎"
     },
     {
-      "id": "mena",
-      "name": "流脑A群疫苗",
-      "nameEn": "MenA",
-      "type": "free",
-      "diseases": ["A群流行性脑脊髓膜炎"],
-      "schedule": [
-        {"ageMonths": 6, "dose": 1, "note": "6月龄"},
-        {"ageMonths": 9, "dose": 2, "note": "9月龄"}
-      ],
-      "totalDoses": 2,
-      "price": 0,
-      "description": "预防A群脑膜炎球菌引起的流行性脑脊髓膜炎。",
-      "sideEffects": "可能有轻微发热和局部反应。",
-      "recommendations": "必须接种。也可选择自费的AC结合疫苗或四价疫苗替代。",
-      "alternatives": ["menac_conj", "acyw135"],
-      "category": "流脑"
-    },
-    {
-      "id": "menac",
-      "name": "流脑A+C群疫苗",
-      "nameEn": "MenAC",
-      "type": "free",
-      "diseases": ["A群流行性脑脊髓膜炎", "C群流行性脑脊髓膜炎"],
-      "schedule": [
-        {"ageMonths": 36, "dose": 1, "note": "3岁"},
-        {"ageMonths": 72, "dose": 2, "note": "6岁"}
-      ],
-      "totalDoses": 2,
-      "price": 0,
-      "description": "预防A群和C群脑膜炎球菌感染。",
-      "sideEffects": "可能有轻微发热和局部反应。",
-      "recommendations": "必须接种。3岁和6岁各接种1剂。",
-      "alternatives": ["acyw135"],
-      "category": "流脑"
-    },
-    {
       "id": "menac_conj",
-      "name": "流脑A+C结合疫苗",
-      "nameEn": "MenAC-Conjugate",
+      "name": "流脑ACYW135(结合)",
+      "nameEn": "MenACYW135-Conjugate",
       "type": "paid",
-      "diseases": ["A群流行性脑脊髓膜炎", "C群流行性脑脊髓膜炎"],
-      "schedule": [
-        {"ageMonths": 3, "dose": 1, "note": "3月龄起可接种"},
-        {"ageMonths": 4, "dose": 2, "note": "间隔1月"},
-        {"ageMonths": 5, "dose": 3, "note": "间隔1月"}
+      "diseases": [
+        "A群流脑",
+        "C群流脑",
+        "Y群流脑",
+        "W135群流脑"
       ],
-      "totalDoses": 3,
+      "schedule": [
+        {
+          "ageMonths": 3,
+          "dose": 1,
+          "note": "3月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 3,
+          "note": "4月龄(社康通显示第3剂，待确认)"
+        },
+        {
+          "ageMonths": 12,
+          "dose": 4,
+          "note": "12月龄"
+        }
+      ],
+      "totalDoses": 4,
       "price": 154,
-      "description": "结合疫苗，可在更小月龄接种，免疫效果更好。",
+      "description": "结合疫苗，社康通排苗表为3-4月龄启动，1岁完成加强。",
       "sideEffects": "可能有轻微发热和局部红肿。",
       "recommendations": "推荐。可替代免费A群疫苗，提前获得保护。",
-      "replaces": ["mena"],
+      "replaces": [
+        "mena",
+        "menac"
+      ],
       "category": "流脑"
     },
     {
       "id": "acyw135",
-      "name": "ACYW135流脑疫苗",
-      "nameEn": "MenACYW135",
+      "name": "流脑ACYW135(多糖)",
+      "nameEn": "MenACYW135-Polysaccharide",
       "type": "paid",
-      "diseases": ["A群流脑", "C群流脑", "Y群流脑", "W135群流脑"],
+      "diseases": [
+        "A群流脑",
+        "C群流脑",
+        "Y群流脑",
+        "W135群流脑"
+      ],
       "schedule": [
-        {"ageMonths": 36, "dose": 1, "note": "3岁"},
-        {"ageMonths": 72, "dose": 2, "note": "6岁"}
+        {
+          "ageMonths": 36,
+          "dose": 1,
+          "note": "3岁"
+        },
+        {
+          "ageMonths": 72,
+          "dose": 2,
+          "note": "6岁"
+        }
       ],
       "totalDoses": 2,
       "price": 451,
-      "description": "四价疫苗，预防4种血清群的脑膜炎球菌感染，保护更全面。",
+      "description": "多糖疫苗，用于3岁与6岁加强。",
       "sideEffects": "可能有轻微发热和局部反应。",
       "recommendations": "推荐。保护范围比免费疫苗更广，出国留学可能需要。",
-      "replaces": ["menac"],
+      "replaces": [
+        "menac"
+      ],
       "category": "流脑"
     },
     {
-      "id": "dt",
-      "name": "白破疫苗",
-      "nameEn": "DT",
-      "type": "free",
-      "diseases": ["白喉", "破伤风"],
-      "schedule": [
-        {"ageMonths": 72, "dose": 1, "note": "6岁"}
-      ],
-      "totalDoses": 1,
-      "price": 0,
-      "description": "白喉破伤风联合疫苗，用于6岁加强免疫。",
-      "sideEffects": "接种部位可能红肿、疼痛。",
-      "recommendations": "必须接种。6岁时接种1剂加强。",
-      "alternatives": [],
-      "category": "百白破"
-    },
-    {
       "id": "pcv13",
-      "name": "13价肺炎球菌疫苗",
+      "name": "13价肺炎球菌结合疫苗",
       "nameEn": "PCV13",
       "type": "paid",
-      "diseases": ["肺炎球菌性肺炎", "脑膜炎", "中耳炎", "菌血症"],
+      "diseases": [
+        "肺炎球菌性肺炎",
+        "脑膜炎",
+        "中耳炎",
+        "菌血症"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄(6周龄起)"},
-        {"ageMonths": 4, "dose": 2, "note": "4月龄"},
-        {"ageMonths": 6, "dose": 3, "note": "6月龄"},
-        {"ageMonths": 12, "dose": 4, "note": "12-15月龄加强"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄(6周龄起)"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 3,
+          "note": "4月龄(社康通显示第3剂，待确认)"
+        },
+        {
+          "ageMonths": 12,
+          "dose": 4,
+          "note": "12-15月龄加强"
+        }
       ],
       "totalDoses": 4,
       "price": 730,
-      "description": "预防13种血清型肺炎球菌引起的侵袭性疾病。肺炎球菌是儿童肺炎、脑膜炎的主要病原体。",
+      "description": "13价肺炎球菌结合疫苗，预防13种血清型肺炎球菌引起的侵袭性疾病。肺炎球菌是儿童肺炎、脑膜炎的主要病原体。",
       "sideEffects": "接种部位红肿、发热、烦躁，通常1-2天消退。",
       "recommendations": "强烈推荐。WHO最优先推荐的疫苗之一，建议6周龄起尽早接种。",
       "alternatives": [],
-      "ageLimit": {"max": 71, "note": "超过71月龄(约6岁)不再建议接种13价，可选择23价"},
+      "ageLimit": {
+        "max": 71,
+        "note": "超过71月龄(约6岁)不再建议接种13价，可选择23价"
+      },
       "category": "肺炎"
     },
     {
@@ -362,9 +595,15 @@
       "name": "23价肺炎球菌疫苗",
       "nameEn": "PPV23",
       "type": "paid",
-      "diseases": ["肺炎球菌性肺炎"],
+      "diseases": [
+        "肺炎球菌性肺炎"
+      ],
       "schedule": [
-        {"ageMonths": 24, "dose": 1, "note": "2岁以上"}
+        {
+          "ageMonths": 24,
+          "dose": 1,
+          "note": "2岁以上"
+        }
       ],
       "totalDoses": 1,
       "price": 235,
@@ -376,22 +615,41 @@
     },
     {
       "id": "rv",
-      "name": "轮状病毒疫苗",
+      "name": "5价轮状病毒疫苗",
       "nameEn": "Rotavirus",
       "type": "paid",
-      "diseases": ["轮状病毒性腹泻"],
+      "diseases": [
+        "轮状病毒性腹泻"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄(6周龄起)"},
-        {"ageMonths": 4, "dose": 2, "note": "4月龄"},
-        {"ageMonths": 6, "dose": 3, "note": "6月龄"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄(6周龄起)"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 2,
+          "note": "4月龄"
+        },
+        {
+          "ageMonths": 4,
+          "dose": 3,
+          "note": "4月龄(社康通显示第3剂，待确认)"
+        }
       ],
       "totalDoses": 3,
       "price": 314,
-      "description": "预防轮状病毒引起的严重腹泻。轮状病毒是婴幼儿腹泻的主要原因，可导致脱水甚至死亡。",
+      "description": "5价轮状病毒疫苗，预防轮状病毒引起的严重腹泻。轮状病毒是婴幼儿腹泻的主要原因，可导致脱水甚至死亡。",
       "sideEffects": "可能有轻微腹泻、呕吐、发热。",
       "recommendations": "强烈推荐。建议尽早接种，第一剂最晚不超过12周龄，全程在32周龄前完成。",
-      "alternatives": ["rv_single"],
-      "ageLimit": {"max": 32, "note": "第一剂须在6-12周龄接种，全程须在32周龄前完成"},
+      "alternatives": [
+        "rv_single"
+      ],
+      "ageLimit": {
+        "max": 32,
+        "note": "第一剂须在6-12周龄接种，全程须在32周龄前完成"
+      },
       "category": "轮状"
     },
     {
@@ -399,16 +657,24 @@
       "name": "单价轮状病毒疫苗",
       "nameEn": "Rotavirus-Mono",
       "type": "paid",
-      "diseases": ["轮状病毒性腹泻"],
+      "diseases": [
+        "轮状病毒性腹泻"
+      ],
       "schedule": [
-        {"ageMonths": 2, "dose": 1, "note": "2月龄起，每年一剂"}
+        {
+          "ageMonths": 2,
+          "dose": 1,
+          "note": "2月龄起，每年一剂"
+        }
       ],
       "totalDoses": 3,
       "price": 208,
       "description": "口服减毒活疫苗，每年接种一次，可在较大年龄接种。",
       "sideEffects": "可能有轻微腹泻、低热。",
       "recommendations": "可选。如错过五价轮状病毒疫苗最佳接种时间，可选择单价疫苗。",
-      "alternatives": ["rv"],
+      "alternatives": [
+        "rv"
+      ],
       "category": "轮状"
     },
     {
@@ -416,10 +682,20 @@
       "name": "水痘疫苗",
       "nameEn": "Varicella",
       "type": "paid",
-      "diseases": ["水痘"],
+      "diseases": [
+        "水痘"
+      ],
       "schedule": [
-        {"ageMonths": 12, "dose": 1, "note": "12月龄"},
-        {"ageMonths": 48, "dose": 2, "note": "4岁加强"}
+        {
+          "ageMonths": 12,
+          "dose": 1,
+          "note": "12月龄"
+        },
+        {
+          "ageMonths": 48,
+          "dose": 2,
+          "note": "4岁加强"
+        }
       ],
       "totalDoses": 2,
       "price": 197,
@@ -432,13 +708,24 @@
     },
     {
       "id": "ev71",
-      "name": "手足口病疫苗",
+      "name": "EV71疫苗(Vero细胞)",
       "nameEn": "EV71",
       "type": "paid",
-      "diseases": ["手足口病(EV71型)", "疱疹性咽峡炎"],
+      "diseases": [
+        "手足口病(EV71型)",
+        "疱疹性咽峡炎"
+      ],
       "schedule": [
-        {"ageMonths": 6, "dose": 1, "note": "6月龄起"},
-        {"ageMonths": 7, "dose": 2, "note": "间隔1个月"}
+        {
+          "ageMonths": 6,
+          "dose": 1,
+          "note": "6月龄起"
+        },
+        {
+          "ageMonths": 7,
+          "dose": 2,
+          "note": "间隔1个月"
+        }
       ],
       "totalDoses": 2,
       "price": 224,
@@ -446,45 +733,127 @@
       "sideEffects": "接种部位红肿、发热，通常轻微。",
       "recommendations": "推荐。5岁以下儿童高发，建议12月龄前完成接种。",
       "alternatives": [],
-      "ageLimit": {"max": 60, "note": "建议6月龄-5岁儿童接种"},
+      "ageLimit": {
+        "max": 60,
+        "note": "建议6月龄-5岁儿童接种"
+      },
       "category": "手足口"
     },
     {
       "id": "flu",
-      "name": "流感疫苗",
+      "name": "四价流感疫苗（裂解6月龄及以上）",
       "nameEn": "Influenza",
       "type": "paid",
-      "diseases": ["流行性感冒"],
-      "schedule": [
-        {"ageMonths": 6, "dose": 1, "note": "6月龄起，每年接种"}
+      "diseases": [
+        "流行性感冒"
       ],
-      "totalDoses": 1,
+      "schedule": [
+        {
+          "ageMonths": 6,
+          "dose": 1,
+          "note": "6月龄第1剂"
+        },
+        {
+          "ageMonths": 7,
+          "dose": 2,
+          "note": "7月龄第2剂"
+        },
+        {
+          "ageMonths": 36,
+          "dose": 3,
+          "note": "3岁加强"
+        },
+        {
+          "ageMonths": 48,
+          "dose": 4,
+          "note": "4岁加强"
+        }
+      ],
+      "totalDoses": 4,
       "price": 158,
-      "description": "预防季节性流行性感冒。流感可导致肺炎、脑炎等严重并发症，老人和儿童是高危人群。",
+      "description": "四价流感疫苗（裂解6月龄及以上），预防季节性流行性感冒。",
       "sideEffects": "接种部位疼痛、轻微发热。",
-      "recommendations": "推荐每年接种。深圳中小学生和60岁以上老人可免费接种。首次接种的6月龄-8岁儿童需接种2剂，间隔至少4周。",
+      "recommendations": "社康通排苗表显示为6-7月龄完成首年2剂，3岁与4岁加强。",
       "alternatives": [],
       "note": "深圳中小学生免费",
       "category": "流感"
+    },
+    {
+      "id": "hpv2",
+      "name": "2价HPV疫苗（毕赤酵母）",
+      "nameEn": "HPV2",
+      "type": "paid",
+      "diseases": [
+        "宫颈癌"
+      ],
+      "schedule": [
+        {
+          "ageMonths": 156,
+          "dose": 1,
+          "note": "13岁第1剂"
+        },
+        {
+          "ageMonths": 162,
+          "dose": 2,
+          "note": "13岁6个月第2剂"
+        }
+      ],
+      "totalDoses": 2,
+      "price": null,
+      "description": "2价HPV疫苗（毕赤酵母），社康通预约平台显示为女生13岁与13岁6个月各1剂。",
+      "sideEffects": "接种部位疼痛、红肿，少数有发热。",
+      "recommendations": "建议在首次性行为前完成接种。",
+      "alternatives": [
+        "hpv4",
+        "hpv9"
+      ],
+      "ageLimit": {
+        "min": 156,
+        "max": 540,
+        "note": "适用于13岁及以上女性"
+      },
+      "category": "HPV"
     },
     {
       "id": "hpv4",
       "name": "四价HPV疫苗",
       "nameEn": "HPV4",
       "type": "paid",
-      "diseases": ["宫颈癌", "尖锐湿疣", "外阴癌前病变"],
+      "diseases": [
+        "宫颈癌",
+        "尖锐湿疣",
+        "外阴癌前病变"
+      ],
       "schedule": [
-        {"ageMonths": 108, "dose": 1, "note": "9岁起第1剂"},
-        {"ageMonths": 110, "dose": 2, "note": "间隔2个月"},
-        {"ageMonths": 114, "dose": 3, "note": "间隔4个月"}
+        {
+          "ageMonths": 108,
+          "dose": 1,
+          "note": "9岁起第1剂"
+        },
+        {
+          "ageMonths": 110,
+          "dose": 2,
+          "note": "间隔2个月"
+        },
+        {
+          "ageMonths": 114,
+          "dose": 3,
+          "note": "间隔4个月"
+        }
       ],
       "totalDoses": 3,
       "price": 831,
       "description": "预防HPV6/11/16/18型病毒感染，可预防约70%的宫颈癌和90%的尖锐湿疣。",
       "sideEffects": "接种部位疼痛、红肿，少数有发热、头痛。",
       "recommendations": "推荐9-45岁女性接种。越早接种效果越好。",
-      "alternatives": ["hpv9"],
-      "ageLimit": {"min": 108, "max": 540, "note": "适用于9-45岁女性"},
+      "alternatives": [
+        "hpv9"
+      ],
+      "ageLimit": {
+        "min": 108,
+        "max": 540,
+        "note": "适用于9-45岁女性"
+      },
       "category": "HPV"
     },
     {
@@ -492,19 +861,43 @@
       "name": "九价HPV疫苗",
       "nameEn": "HPV9",
       "type": "paid",
-      "diseases": ["宫颈癌", "尖锐湿疣", "外阴癌", "阴道癌", "肛门癌"],
+      "diseases": [
+        "宫颈癌",
+        "尖锐湿疣",
+        "外阴癌",
+        "阴道癌",
+        "肛门癌"
+      ],
       "schedule": [
-        {"ageMonths": 108, "dose": 1, "note": "9岁起第1剂"},
-        {"ageMonths": 110, "dose": 2, "note": "间隔2个月"},
-        {"ageMonths": 114, "dose": 3, "note": "间隔4个月"}
+        {
+          "ageMonths": 108,
+          "dose": 1,
+          "note": "9岁起第1剂"
+        },
+        {
+          "ageMonths": 110,
+          "dose": 2,
+          "note": "间隔2个月"
+        },
+        {
+          "ageMonths": 114,
+          "dose": 3,
+          "note": "间隔4个月"
+        }
       ],
       "totalDoses": 3,
       "price": 1331,
       "description": "预防9种HPV型别，可预防约90%的宫颈癌。保护范围最广的HPV疫苗。",
       "sideEffects": "接种部位疼痛、红肿，少数有发热、头痛。",
       "recommendations": "推荐9-45岁女性优先选择。保护范围最广。",
-      "alternatives": ["hpv4"],
-      "ageLimit": {"min": 108, "max": 540, "note": "适用于9-45岁女性"},
+      "alternatives": [
+        "hpv4"
+      ],
+      "ageLimit": {
+        "min": 108,
+        "max": 540,
+        "note": "适用于9-45岁女性"
+      },
       "category": "HPV"
     },
     {
@@ -512,10 +905,20 @@
       "name": "带状疱疹疫苗",
       "nameEn": "Shingrix",
       "type": "paid",
-      "diseases": ["带状疱疹"],
+      "diseases": [
+        "带状疱疹"
+      ],
       "schedule": [
-        {"ageMonths": 600, "dose": 1, "note": "50岁起第1剂"},
-        {"ageMonths": 602, "dose": 2, "note": "间隔2-6个月"}
+        {
+          "ageMonths": 600,
+          "dose": 1,
+          "note": "50岁起第1剂"
+        },
+        {
+          "ageMonths": 602,
+          "dose": 2,
+          "note": "间隔2-6个月"
+        }
       ],
       "totalDoses": 2,
       "price": 1629,
@@ -523,7 +926,10 @@
       "sideEffects": "接种部位疼痛较常见，可能有发热、肌肉痛。",
       "recommendations": "推荐50岁以上成人接种。",
       "alternatives": [],
-      "ageLimit": {"min": 600, "note": "适用于50岁及以上成人"},
+      "ageLimit": {
+        "min": 600,
+        "note": "适用于50岁及以上成人"
+      },
       "category": "带状疱疹"
     }
   ],
@@ -533,7 +939,10 @@
       "name": "百白破系列",
       "description": "预防百日咳、白喉、破伤风",
       "freeOption": "dtap",
-      "paidOptions": ["dtap_hib", "dtap_ipv_hib"],
+      "paidOptions": [
+        "dtap_hib",
+        "dtap_ipv_hib"
+      ],
       "comparison": "五联疫苗 = 百白破 + 脊灰 + Hib，全程少打8针；四联疫苗 = 百白破 + Hib，需另打脊灰",
       "recommendation": "经济允许首选五联，其次四联，最后免费百白破+免费脊灰+自费Hib"
     },
@@ -542,7 +951,9 @@
       "name": "乙脑系列",
       "description": "预防流行性乙型脑炎",
       "freeOption": "je_live",
-      "paidOptions": ["je_inact"],
+      "paidOptions": [
+        "je_inact"
+      ],
       "comparison": "减毒活疫苗打2针，灭活疫苗打4针。灭活疫苗更适合免疫功能低下者",
       "recommendation": "健康儿童选免费减毒活疫苗即可，特殊体质选灭活疫苗"
     },
@@ -550,26 +961,34 @@
       "id": "hepa_group",
       "name": "甲肝系列",
       "description": "预防甲型肝炎",
-      "freeOption": "hepa_live",
-      "paidOptions": ["hepa_inact"],
-      "comparison": "减毒活疫苗打1针，灭活疫苗打2针。灭活疫苗保护期更长",
-      "recommendation": "健康儿童选免费减毒活疫苗即可"
+      "freeOption": null,
+      "paidOptions": [
+        "hepa_inact"
+      ],
+      "comparison": "社康通排苗表显示甲肝使用灭活疫苗2剂（1岁、1岁6个月）。",
+      "recommendation": "按社康通预约信息接种灭活甲肝疫苗。"
     },
     {
       "id": "men_group",
       "name": "流脑系列",
       "description": "预防流行性脑脊髓膜炎",
-      "freeOption": "mena",
-      "paidOptions": ["menac_conj", "acyw135"],
-      "comparison": "免费A群疫苗6月龄起接种；自费AC结合疫苗3月龄起可接种，更早获得保护；四价疫苗保护范围更广",
-      "recommendation": "想早保护选AC结合，想更全面选四价ACYW135"
+      "freeOption": null,
+      "paidOptions": [
+        "menac_conj",
+        "acyw135"
+      ],
+      "comparison": "社康通排苗表采用ACYW135结合疫苗3月龄启动，1岁完成4剂；3岁与6岁使用ACYW135多糖加强。",
+      "recommendation": "按社康通预约信息优先完成结合疫苗4剂，再按年龄接种多糖加强。"
     },
     {
       "id": "pneumo_group",
       "name": "肺炎系列",
       "description": "预防肺炎球菌感染",
       "freeOption": null,
-      "paidOptions": ["pcv13", "ppv23"],
+      "paidOptions": [
+        "pcv13",
+        "ppv23"
+      ],
       "comparison": "13价结合疫苗适合2月龄-6岁；23价多糖疫苗适合2岁以上。13价免疫效果更好",
       "recommendation": "2岁以下强烈推荐13价，WHO优先推荐的疫苗"
     }
@@ -578,121 +997,165 @@
     {
       "ageMonths": 0,
       "ageLabel": "出生时",
-      "mustHave": ["bcg", "hepb"],
+      "mustHave": [
+        "bcg",
+        "hepb"
+      ],
       "recommended": [],
-      "notes": "出生后24小时内接种乙肝疫苗第1剂和卡介苗"
+      "notes": "出生后尽早接种卡介苗和乙肝第1剂"
     },
     {
       "ageMonths": 1,
       "ageLabel": "1月龄",
-      "mustHave": ["hepb"],
+      "mustHave": [
+        "hepb"
+      ],
       "recommended": [],
-      "notes": "乙肝疫苗第2剂"
+      "notes": "乙肝第2剂"
     },
     {
       "ageMonths": 2,
       "ageLabel": "2月龄",
-      "mustHave": ["ipv"],
-      "recommended": ["dtap_ipv_hib", "pcv13", "rv"],
-      "notes": "脊灰第1剂。强烈推荐此时开始接种五联、13价肺炎和轮状病毒疫苗"
+      "mustHave": [
+        "dtap_ipv_hib",
+        "rv",
+        "pcv13"
+      ],
+      "recommended": [],
+      "notes": "社康通预约显示五联、轮状和13价肺炎第1剂"
     },
     {
       "ageMonths": 3,
       "ageLabel": "3月龄",
-      "mustHave": ["ipv", "dtap"],
-      "recommended": ["dtap_ipv_hib", "dtap_hib", "hib", "menac_conj"],
-      "notes": "脊灰第2剂，百白破第1剂。或选择五联/四联替代"
+      "mustHave": [
+        "menac_conj",
+        "dtap_ipv_hib"
+      ],
+      "recommended": [],
+      "notes": "流脑ACYW135(结合)第1剂，五联第2剂"
     },
     {
       "ageMonths": 4,
       "ageLabel": "4月龄",
-      "mustHave": ["ipv", "dtap"],
-      "recommended": ["dtap_ipv_hib", "dtap_hib", "pcv13", "rv"],
-      "notes": "脊灰第3剂，百白破第2剂。或选择五联/四联替代"
-    },
-    {
-      "ageMonths": 5,
-      "ageLabel": "5月龄",
-      "mustHave": ["dtap"],
-      "recommended": ["dtap_hib"],
-      "notes": "百白破第3剂（如选四联）"
+      "mustHave": [
+        "rv",
+        "pcv13",
+        "menac_conj",
+        "dtap_ipv_hib"
+      ],
+      "recommended": [],
+      "notes": "轮状第2剂、13价肺炎第2剂、流脑结合第2剂、五联第3剂"
     },
     {
       "ageMonths": 6,
       "ageLabel": "6月龄",
-      "mustHave": ["hepb", "mena"],
-      "recommended": ["dtap_ipv_hib", "pcv13", "rv", "ev71", "flu"],
-      "notes": "乙肝第3剂，流脑A群第1剂。推荐接种手足口疫苗和流感疫苗"
+      "mustHave": [
+        "hepb",
+        "flu",
+        "ev71"
+      ],
+      "recommended": [],
+      "notes": "乙肝第3剂、流感第1剂、EV71第1剂"
     },
     {
       "ageMonths": 7,
       "ageLabel": "7月龄",
-      "mustHave": [],
-      "recommended": ["ev71"],
-      "notes": "手足口疫苗第2剂"
+      "mustHave": [
+        "flu",
+        "ev71"
+      ],
+      "recommended": [],
+      "notes": "流感第2剂、EV71第2剂"
     },
     {
       "ageMonths": 8,
       "ageLabel": "8月龄",
-      "mustHave": ["mmr", "je_live"],
-      "recommended": ["je_inact"],
-      "notes": "麻腮风第1剂，乙脑第1剂"
-    },
-    {
-      "ageMonths": 9,
-      "ageLabel": "9月龄",
-      "mustHave": ["mena"],
+      "mustHave": [
+        "mmr",
+        "je_live"
+      ],
       "recommended": [],
-      "notes": "流脑A群第2剂"
+      "notes": "麻腮风第1剂、乙脑第1剂"
     },
     {
       "ageMonths": 12,
-      "ageLabel": "12月龄/1岁",
-      "mustHave": [],
-      "recommended": ["vzv", "pcv13"],
-      "notes": "水痘第1剂（深圳免费），13价肺炎加强剂"
+      "ageLabel": "1岁",
+      "mustHave": [
+        "menac_conj",
+        "hepa_inact",
+        "vzv",
+        "pcv13"
+      ],
+      "recommended": [],
+      "notes": "流脑结合第4剂、甲肝第1剂、水痘第1剂、13价肺炎第4剂"
     },
     {
       "ageMonths": 18,
-      "ageLabel": "18月龄/1.5岁",
-      "mustHave": ["mmr", "dtap", "hepa_live"],
-      "recommended": ["dtap_ipv_hib", "dtap_hib"],
-      "notes": "麻腮风第2剂，百白破第4剂，甲肝第1剂"
+      "ageLabel": "1岁6个月",
+      "mustHave": [
+        "mmr",
+        "hepa_inact",
+        "dtap_ipv_hib"
+      ],
+      "recommended": [],
+      "notes": "麻腮风第2剂、甲肝第2剂、五联第4剂"
     },
     {
       "ageMonths": 24,
-      "ageLabel": "24月龄/2岁",
-      "mustHave": ["je_live"],
-      "recommended": ["hepa_inact", "ppv23"],
-      "notes": "乙脑加强剂"
+      "ageLabel": "2岁",
+      "mustHave": [
+        "je_live"
+      ],
+      "recommended": [],
+      "notes": "乙脑第2剂"
     },
     {
       "ageMonths": 36,
       "ageLabel": "3岁",
-      "mustHave": ["menac"],
-      "recommended": ["acyw135"],
-      "notes": "流脑A+C群第1剂"
+      "mustHave": [
+        "acyw135",
+        "flu"
+      ],
+      "recommended": [],
+      "notes": "流脑ACYW135(多糖)第1剂、流感第3剂"
     },
     {
       "ageMonths": 48,
       "ageLabel": "4岁",
-      "mustHave": ["ipv"],
-      "recommended": ["vzv"],
-      "notes": "脊灰加强剂，水痘第2剂"
+      "mustHave": [
+        "flu",
+        "vzv"
+      ],
+      "recommended": [],
+      "notes": "流感第4剂、水痘第2剂"
     },
     {
       "ageMonths": 72,
       "ageLabel": "6岁",
-      "mustHave": ["dt", "menac"],
-      "recommended": ["acyw135"],
-      "notes": "白破疫苗，流脑A+C群第2剂"
+      "mustHave": [
+        "dtap",
+        "acyw135"
+      ],
+      "recommended": [],
+      "notes": "百白破第5剂、流脑ACYW135(多糖)第2剂"
     },
     {
-      "ageMonths": 108,
-      "ageLabel": "9岁",
-      "mustHave": [],
-      "recommended": ["hpv9", "hpv4"],
-      "notes": "女孩可开始接种HPV疫苗"
+      "ageMonths": 156,
+      "ageLabel": "13岁",
+      "mustHave": [
+        "hpv2"
+      ],
+      "recommended": [],
+      "notes": "女生2价HPV第1剂"
+    },
+    {
+      "ageMonths": 162,
+      "ageLabel": "13岁6个月",
+      "mustHave": [
+        "hpv2"
+      ],
+      "recommended": [],
+      "notes": "女生2价HPV第2剂"
     }
   ],
   "tips": [
