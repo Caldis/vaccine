@@ -30,43 +30,8 @@
     <section class="hero">
       <div class="hero-content">
         <h1>宝宝该打什么疫苗？</h1>
-        <p class="hero-subtitle">输入宝宝月龄，获取个性化接种建议</p>
-
-        <div class="age-selector">
-          <div class="age-input-group">
-            <input type="number" id="ageInput" min="0" max="162" value="2" placeholder="月龄">
-            <span class="age-unit">月龄</span>
-          </div>
-          <input type="range" id="ageSlider" min="0" max="162" value="2" class="age-slider">
-          <div class="age-labels">
-            <span>出生</span>
-            <span>1岁</span>
-            <span>2岁</span>
-            <span>3岁</span>
-            <span>4岁</span>
-            <span>5岁</span>
-            <span>6岁</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Current Vaccines -->
-    <section class="section" id="currentSection">
-      <div class="section-header">
-        <h2>
-          <span class="section-icon">
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 6v6l4 2"/>
-            </svg>
-          </span>
-          当前应接种
-        </h2>
-        <span class="age-display" id="currentAgeDisplay">2月龄</span>
-      </div>
-      <div class="vaccine-grid" id="currentVaccines">
-        <!-- Dynamically populated -->
+        <p class="hero-subtitle">按月龄查看推荐接种项，快速找到当月重点疫苗</p>
+        <button class="primary-btn" id="openAgeModal">查看月龄推荐</button>
       </div>
     </section>
 
@@ -110,6 +75,9 @@
               <span class="legend-item"><span class="dot free"></span>免费疫苗</span>
               <span class="legend-item"><span class="dot paid"></span>自费推荐</span>
               <span class="legend-item"><span class="dot optional"></span>可选</span>
+            </div>
+            <div class="selection-summary" id="selectionSummary">
+              <!-- Dynamically populated -->
             </div>
           </div>
           <div class="timeline" id="timelineView">
@@ -222,6 +190,47 @@
         </button>
         <div class="modal-content" id="modalContent">
           <!-- Dynamically populated -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Age Modal -->
+    <div class="modal-overlay" id="ageModalOverlay">
+      <div class="modal modal-wide" id="ageModal">
+        <button class="modal-close" id="ageModalClose">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18"/>
+            <line x1="6" y1="6" x2="18" y2="18"/>
+          </svg>
+        </button>
+        <div class="modal-content">
+          <div class="age-modal-header">
+            <h2>月龄推荐</h2>
+            <p>输入宝宝月龄，查看当月应接种疫苗</p>
+          </div>
+          <div class="age-selector">
+            <div class="age-input-group">
+              <input type="number" id="ageInput" min="0" max="162" value="2" placeholder="月龄">
+              <span class="age-unit">月龄</span>
+            </div>
+          </div>
+          <section class="section age-modal-section" id="currentSection">
+            <div class="section-header">
+              <h2>
+                <span class="section-icon">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                  </svg>
+                </span>
+                当前应接种
+              </h2>
+              <span class="age-display" id="currentAgeDisplay">2月龄</span>
+            </div>
+            <div class="vaccine-grid" id="currentVaccines">
+              <!-- Dynamically populated -->
+            </div>
+          </section>
         </div>
       </div>
     </div>

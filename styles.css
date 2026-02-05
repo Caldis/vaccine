@@ -129,7 +129,25 @@ body {
 .hero-subtitle {
   font-size: 18px;
   color: var(--foreground-secondary);
-  margin-bottom: 40px;
+  margin-bottom: 24px;
+}
+
+/* Buttons */
+.primary-btn {
+  padding: 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--background);
+  background: var(--foreground);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.primary-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 /* Age Selector */
@@ -146,7 +164,6 @@ body {
   align-items: center;
   justify-content: center;
   gap: 8px;
-  margin-bottom: 24px;
 }
 
 .age-input-group input {
@@ -168,47 +185,6 @@ body {
 .age-unit {
   font-size: 18px;
   color: var(--foreground-secondary);
-}
-
-.age-slider {
-  width: 100%;
-  height: 6px;
-  -webkit-appearance: none;
-  appearance: none;
-  background: var(--border);
-  border-radius: 3px;
-  outline: none;
-  margin-bottom: 12px;
-}
-
-.age-slider::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: var(--foreground);
-  border-radius: 50%;
-  cursor: pointer;
-  transition: transform var(--transition-fast);
-}
-
-.age-slider::-webkit-slider-thumb:hover {
-  transform: scale(1.1);
-}
-
-.age-slider::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: var(--foreground);
-  border-radius: 50%;
-  cursor: pointer;
-  border: none;
-}
-
-.age-labels {
-  display: flex;
-  justify-content: space-between;
-  font-size: 12px;
-  color: var(--foreground-tertiary);
 }
 
 /* Section */
@@ -392,6 +368,9 @@ body {
   padding: 16px 24px;
   border-bottom: 1px solid var(--border);
   background: var(--background-secondary);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
 }
 
 .timeline-legend {
@@ -471,8 +450,22 @@ body {
   padding: 6px 12px;
   font-size: 13px;
   border-radius: var(--radius-md);
-  cursor: pointer;
   transition: all var(--transition-fast);
+}
+
+.timeline-vaccine button {
+  border: none;
+  background: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+}
+
+.timeline-vaccine .vaccine-check {
+  accent-color: var(--foreground);
+  cursor: pointer;
 }
 
 .timeline-vaccine.free {
@@ -496,9 +489,107 @@ body {
   box-shadow: var(--shadow-sm);
 }
 
+.timeline-vaccine.is-disabled {
+  opacity: 0.45;
+  pointer-events: none;
+  filter: grayscale(1);
+}
+
+.timeline-vaccine.is-selected {
+  box-shadow: 0 0 0 1px var(--foreground) inset;
+}
+
 .timeline-vaccine .dose {
   font-size: 11px;
   opacity: 0.8;
+}
+
+.disabled-reason {
+  font-size: 11px;
+  color: var(--foreground-tertiary);
+}
+
+.selection-summary {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 12px 16px;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+}
+
+.selection-empty {
+  font-size: 13px;
+  color: var(--foreground-tertiary);
+}
+
+.selection-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.selection-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  font-size: 12px;
+  background: var(--background-secondary);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.selection-chip:hover {
+  border-color: var(--foreground);
+}
+
+.selection-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  font-size: 12px;
+}
+
+.selection-count {
+  color: var(--foreground-tertiary);
+}
+
+.selection-clear {
+  border: none;
+  background: none;
+  color: var(--foreground);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.compare-item.is-disabled {
+  opacity: 0.5;
+  filter: grayscale(1);
+}
+
+.compare-item.is-selected {
+  border: 1px solid var(--foreground);
+}
+
+.compare-item-status {
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--foreground-tertiary);
+}
+
+.badge-selected {
+  background: var(--foreground);
+  color: var(--background);
+}
+
+.badge-disabled {
+  background: var(--background-secondary);
+  color: var(--foreground-tertiary);
 }
 
 /* Compare View */
@@ -934,6 +1025,10 @@ body {
   animation: modalIn 0.2s ease;
 }
 
+.modal-wide {
+  max-width: 860px;
+}
+
 @keyframes modalIn {
   from {
     opacity: 0;
@@ -970,6 +1065,26 @@ body {
   padding: 32px;
   overflow-y: auto;
   max-height: 90vh;
+}
+
+.age-modal-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.age-modal-header h2 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.age-modal-header p {
+  font-size: 14px;
+  color: var(--foreground-secondary);
+}
+
+.age-modal-section {
+  padding: 24px 0 0;
 }
 
 .modal-header {
