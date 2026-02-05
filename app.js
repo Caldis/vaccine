@@ -1,4 +1,41 @@
 // Vaccine Guide Application
+const I18N = {
+  zh: {
+    appTitle: '儿童疫苗接种指南 - 深圳社康', logoTitle: '疫苗接种指南', headerBadge: '深圳社康', languageLabel: '语言',
+    themeToggleDark: '暗黑模式', themeToggleLight: '浅色模式', heroTitle: '宝宝该打什么疫苗？', heroSubtitle: '按月龄查看推荐接种项，快速找到当月重点疫苗',
+    heroButton: '查看月龄推荐', tabTimeline: '接种时间轴', tabCompare: '免费 vs 自费', tabAll: '全部疫苗',
+    legendFree: '免费疫苗', legendPaid: '自费推荐', legendOptional: '可选', compareFree: '免费疫苗', compareFreeBadge: '国家免疫规划',
+    comparePaid: '自费疫苗', comparePaidBadge: '自愿接种', groupsTitle: '替代关系对比', searchPlaceholder: '搜索疫苗名称或预防疾病...',
+    allCategory: '全部', thName: '疫苗名称', thType: '类型', thDisease: '预防疾病', thDose: '接种剂次', thPrice: '参考价格',
+    tipsTitle: '接种小贴士', footerDisclaimer: '本页面信息仅供参考，具体接种方案请咨询当地社康中心或医生。<br>数据来源：深圳市卫健委、广东省非免疫规划疫苗接种方案（2024版）、国家免疫规划疫苗儿童免疫程序（2021版）',
+    linkShenzhen: '深圳卫健委', linkCdc: '中国疾控中心', ageModalTitle: '月龄推荐', ageModalSubtitle: '输入宝宝月龄，查看当月应接种疫苗',
+    agePlaceholder: '月龄', ageUnit: '月龄', currentSectionTitle: '当前应接种', loadError: '无法加载疫苗数据，请确保 data/vaccines.json 文件存在',
+    free: '免费', paid: '自费', pendingPrice: '价格待确认', doseUnit: '剂', doseCount: '剂次', ageBirth: '出生时', ageMonth: '{n}月龄', ageYear: '{n}岁',
+    noneRequired: '该月龄暂无必须接种的疫苗', doseNo: '第{n}剂', replaced: '已替代', noneSelected: '未勾选任何疫苗',
+    selectedCount: '已勾选 {selected} 项', replacedCount: ' · 已替代 {disabled} 项', clear: '清空', noResult: '没有找到匹配的疫苗',
+    detail: '详情', freeVaccine: '免费疫苗', paidVaccine: '自费疫苗', fullCourse: '全程{doses}剂，约需 ¥{price}', selected: '已勾选',
+    replacedLong: '已被替代', disease: '预防疾病', intro: '疫苗说明', schedule: '接种程序', priceTitle: '参考价格', sideEffects: '不良反应',
+    alternatives: '替代方案', canReplace: '可替代', recommendation: '接种建议', ageLimit: '年龄限制'
+  },
+  en: {
+    appTitle: 'Childhood Vaccine Guide - Shenzhen Community Health', logoTitle: 'Vaccine Guide', headerBadge: 'Shenzhen CHC', languageLabel: 'Lang',
+    themeToggleDark: 'Dark', themeToggleLight: 'Light', heroTitle: 'What vaccine should my child get?', heroSubtitle: 'Check recommended vaccines by age in months.',
+    heroButton: 'View age guidance', tabTimeline: 'Timeline', tabCompare: 'Free vs Paid', tabAll: 'All Vaccines',
+    legendFree: 'Free', legendPaid: 'Paid recommended', legendOptional: 'Optional', compareFree: 'Free Vaccines', compareFreeBadge: 'National Program',
+    comparePaid: 'Paid Vaccines', comparePaidBadge: 'Voluntary', groupsTitle: 'Alternative comparison', searchPlaceholder: 'Search vaccine name or disease...',
+    allCategory: 'All', thName: 'Vaccine', thType: 'Type', thDisease: 'Disease', thDose: 'Doses', thPrice: 'Price', tipsTitle: 'Tips',
+    footerDisclaimer: 'This page is for reference only. Please consult your local clinic or doctor for vaccination plans.<br>Sources: Shenzhen Health Commission and national schedules.',
+    linkShenzhen: 'Shenzhen Health', linkCdc: 'China CDC', ageModalTitle: 'Age Guidance', ageModalSubtitle: 'Enter age in months to view recommended vaccines',
+    agePlaceholder: 'Months', ageUnit: 'months', currentSectionTitle: 'Recommended now', loadError: 'Failed to load data. Please ensure data/vaccines.json exists.',
+    free: 'Free', paid: 'Paid', pendingPrice: 'TBD', doseUnit: 'dose', doseCount: 'doses', ageBirth: 'At birth', ageMonth: '{n} mo', ageYear: '{n} y',
+    noneRequired: 'No required vaccine for this age.', doseNo: 'Dose {n}', replaced: 'Replaced', noneSelected: 'No vaccines selected',
+    selectedCount: 'Selected {selected}', replacedCount: ' · Replaced {disabled}', clear: 'Clear', noResult: 'No vaccines matched', detail: 'Details',
+    freeVaccine: 'Free vaccine', paidVaccine: 'Paid vaccine', fullCourse: 'Total {doses} doses, about ¥{price}', selected: 'Selected', replacedLong: 'Replaced',
+    disease: 'Disease', intro: 'Description', schedule: 'Schedule', priceTitle: 'Price', sideEffects: 'Side effects', alternatives: 'Alternatives',
+    canReplace: 'Can replace', recommendation: 'Recommendation', ageLimit: 'Age limit'
+  }
+};
+
 class VaccineGuide {
   constructor() {
     this.data = null;
@@ -8,6 +45,8 @@ class VaccineGuide {
     this.categoryFilter = 'all';
     this.selectedVaccines = new Set();
     this.alternativeMap = new Map();
+    this.language = localStorage.getItem('vaccineGuideLang') || 'zh';
+    this.theme = localStorage.getItem('vaccineGuideTheme') || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
 
     this.init();
   }
@@ -16,6 +55,7 @@ class VaccineGuide {
     await this.loadData();
     this.buildAlternativeMap();
     this.loadSelectedVaccines();
+    this.applyTheme();
     this.bindEvents();
     this.render();
   }
@@ -45,7 +85,7 @@ class VaccineGuide {
           <line x1="12" y1="8" x2="12" y2="12"/>
           <line x1="12" y1="16" x2="12.01" y2="16"/>
         </svg>
-        <p>无法加载疫苗数据，请确保 data/vaccines.json 文件存在</p>
+        <p>${this.t('loadError')}</p>
       </div>
     `;
   }
@@ -54,6 +94,24 @@ class VaccineGuide {
     // Age input and slider
     const ageInput = document.getElementById('ageInput');
     const maxAge = 162;
+
+    const languageSelect = document.getElementById('languageSelect');
+    const themeToggle = document.getElementById('themeToggle');
+    if (languageSelect) {
+      languageSelect.value = this.language;
+      languageSelect.addEventListener('change', (e) => {
+        this.language = e.target.value;
+        localStorage.setItem('vaccineGuideLang', this.language);
+        this.render();
+      });
+    }
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        this.theme = this.theme === 'dark' ? 'light' : 'dark';
+        localStorage.setItem('vaccineGuideTheme', this.theme);
+        this.applyTheme();
+      });
+    }
 
     ageInput.addEventListener('input', (e) => {
       let value = parseInt(e.target.value) || 0;
@@ -169,9 +227,51 @@ class VaccineGuide {
   }
 
   getPriceLabel(vaccine, withUnit = true) {
-    if (vaccine.type === 'free') return '免费';
-    if (vaccine.price === null || vaccine.price === undefined) return '价格待确认';
-    return withUnit ? `¥${vaccine.price}/剂` : `¥${vaccine.price}`;
+    if (vaccine.type === 'free') return this.t('free');
+    if (vaccine.price === null || vaccine.price === undefined) return this.t('pendingPrice');
+    return withUnit ? `¥${vaccine.price}/${this.t('doseUnit')}` : `¥${vaccine.price}`;
+  }
+
+
+
+  t(key, vars = {}) {
+    const dict = I18N[this.language] || I18N.zh;
+    const fallback = I18N.zh[key] || key;
+    let text = dict[key] || fallback;
+    Object.entries(vars).forEach(([k, v]) => {
+      text = text.replace(`{${k}}`, v);
+    });
+    return text;
+  }
+
+  getVaccineName(vaccine) {
+    return this.language === 'en' ? (vaccine.nameEn || vaccine.name) : vaccine.name;
+  }
+
+  applyTheme() {
+    document.documentElement.setAttribute('data-theme', this.theme);
+    const themeToggle = document.getElementById('themeToggle');
+    if (themeToggle) {
+      themeToggle.textContent = this.theme === 'dark' ? this.t('themeToggleLight') : this.t('themeToggleDark');
+    }
+  }
+
+  applyTranslations() {
+    document.documentElement.lang = this.language === 'en' ? 'en' : 'zh-CN';
+    document.title = this.t('appTitle');
+    document.querySelectorAll('[data-i18n]').forEach(el => {
+      const key = el.dataset.i18n;
+      const txt = this.t(key);
+      if (key === 'footerDisclaimer') {
+        el.innerHTML = txt;
+      } else if (!el.querySelector('svg')) {
+        el.textContent = txt;
+      }
+    });
+    document.querySelectorAll('[data-i18n-placeholder]').forEach(el => {
+      el.placeholder = this.t(el.dataset.i18nPlaceholder);
+    });
+    this.applyTheme();
   }
 
   switchTab(tabId) {
@@ -189,6 +289,7 @@ class VaccineGuide {
   }
 
   render() {
+    this.applyTranslations();
     this.updateCurrentVaccines();
     this.renderTimeline();
     this.renderCompare();
@@ -198,17 +299,17 @@ class VaccineGuide {
   }
 
   getAgeLabel(months) {
-    if (months === 0) return '出生时';
-    if (months < 12) return `${months}月龄`;
-    if (months === 12) return '1岁';
-    if (months < 24) return `${months}月龄`;
-    if (months === 24) return '2岁';
-    if (months === 36) return '3岁';
-    if (months === 48) return '4岁';
-    if (months === 60) return '5岁';
-    if (months === 72) return '6岁';
-    if (months >= 108) return `${Math.floor(months / 12)}岁`;
-    return `${months}月龄`;
+    if (months === 0) return this.t('ageBirth');
+    if (months < 12) return this.t('ageMonth', { n: months });
+    if (months === 12) return this.t('ageYear', { n: 1 });
+    if (months < 24) return this.t('ageMonth', { n: months });
+    if (months === 24) return this.t('ageYear', { n: 2 });
+    if (months === 36) return this.t('ageYear', { n: 3 });
+    if (months === 48) return this.t('ageYear', { n: 4 });
+    if (months === 60) return this.t('ageYear', { n: 5 });
+    if (months === 72) return this.t('ageYear', { n: 6 });
+    if (months >= 108) return this.t('ageYear', { n: Math.floor(months / 12) });
+    return this.t('ageMonth', { n: months });
   }
 
   updateCurrentVaccines() {
@@ -254,7 +355,7 @@ class VaccineGuide {
             <circle cx="12" cy="12" r="10"/>
             <path d="M8 12h8"/>
           </svg>
-          <p>该月龄暂无必须接种的疫苗</p>
+          <p>${this.t('noneRequired')}</p>
         </div>
       `;
       return;
@@ -273,16 +374,16 @@ class VaccineGuide {
 
   renderVaccineCard(vaccine) {
     const typeClass = vaccine.type === 'free' ? 'free' : 'paid';
-    const typeLabel = vaccine.type === 'free' ? '免费' : '自费';
+    const typeLabel = vaccine.type === 'free' ? this.t('free') : this.t('paid');
     const price = this.getPriceLabel(vaccine, true);
 
     return `
       <div class="vaccine-card ${typeClass}" data-id="${vaccine.id}">
         <div class="vaccine-card-header">
-          <span class="vaccine-card-title">${vaccine.name}</span>
+          <span class="vaccine-card-title">${this.getVaccineName(vaccine)}</span>
           <span class="vaccine-card-badge ${typeClass}">${typeLabel}</span>
         </div>
-        <div class="vaccine-card-diseases">${vaccine.diseases.join('、')}</div>
+        <div class="vaccine-card-diseases">${vaccine.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
         <div class="vaccine-card-meta">
           <span>
             <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -336,16 +437,16 @@ class VaccineGuide {
               }
 
               const schedule = v.schedule.find(s => s.ageMonths === guide.ageMonths);
-              const doseText = schedule ? `第${schedule.dose}剂` : '';
+              const doseText = schedule ? `${this.t('doseNo', { n: schedule.dose })}` : '';
               const isSelected = this.selectedVaccines.has(v.id);
               const isDisabled = !isSelected && disabledVaccines.has(v.id);
-              const statusBadge = isDisabled ? '<span class="disabled-reason">已替代</span>' : '';
+              const statusBadge = isDisabled ? `<span class="disabled-reason">${this.t('replaced')}</span>` : '';
 
               return `
                 <div class="timeline-vaccine ${typeClass} ${isDisabled ? 'is-disabled' : ''} ${isSelected ? 'is-selected' : ''}" data-id="${v.id}">
                   <input class="vaccine-check" type="checkbox" data-id="${v.id}" ${isSelected ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
                   <button type="button" class="vaccine-detail" data-id="${v.id}">
-                    ${v.name}
+                    ${this.getVaccineName(v)}
                   </button>
                   ${doseText ? `<span class="dose">${doseText}</span>` : ''}
                   ${statusBadge}
@@ -393,7 +494,7 @@ class VaccineGuide {
 
     if (selected.length === 0) {
       container.innerHTML = `
-        <span class="selection-empty">未勾选任何疫苗</span>
+        <span class="selection-empty">${this.t('noneSelected')}</span>
       `;
       return;
     }
@@ -404,14 +505,14 @@ class VaccineGuide {
       <div class="selection-chips">
         ${selected.map(vaccine => `
           <button class="selection-chip" data-id="${vaccine.id}" type="button">
-            ${vaccine.name}
+            ${this.getVaccineName(vaccine)}
             <span aria-hidden="true">×</span>
           </button>
         `).join('')}
       </div>
       <div class="selection-actions">
-        <span class="selection-count">已勾选 ${selected.length} 项${disabledCount ? ` · 已替代 ${disabledCount} 项` : ''}</span>
-        <button class="selection-clear" type="button">清空</button>
+        <span class="selection-count">${this.t('selectedCount', { selected: selected.length })}${disabledCount ? this.t('replacedCount', { disabled: disabledCount }) : ''}</span>
+        <button class="selection-clear" type="button">${this.t('clear')}</button>
       </div>
     `;
 
@@ -437,14 +538,7 @@ class VaccineGuide {
   }
 
   updateTimeline() {
-    // Just update the current indicator
-    document.querySelectorAll('.timeline-age').forEach(el => {
-      const ageText = el.textContent;
-      const guide = this.data.ageGuide.find(g => g.ageLabel === ageText);
-      if (guide) {
-        el.classList.toggle('current', guide.ageMonths === this.currentAge);
-      }
-    });
+    this.renderTimeline();
   }
 
   renderCompare() {
@@ -457,10 +551,10 @@ class VaccineGuide {
     const freeVaccines = this.data.vaccines.filter(v => v.type === 'free');
     freeList.innerHTML = freeVaccines.map(v => `
       <div class="compare-item ${this.selectedVaccines.has(v.id) ? 'is-selected' : ''} ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? 'is-disabled' : ''}" data-id="${v.id}">
-        <div class="compare-item-name">${v.name}</div>
-        <div class="compare-item-diseases">${v.diseases.join('、')}</div>
-        <div class="compare-item-price">免费 · ${v.totalDoses}剂次</div>
-        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? '<div class="compare-item-status">已被替代</div>' : ''}
+        <div class="compare-item-name">${this.getVaccineName(v)}</div>
+        <div class="compare-item-diseases">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
+        <div class="compare-item-price">${this.t('free')} · ${v.totalDoses}${this.t('doseCount')}</div>
+        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? `<div class="compare-item-status">${this.t('replacedLong')}</div>` : ''}
       </div>
     `).join('');
 
@@ -468,10 +562,10 @@ class VaccineGuide {
     const paidVaccines = this.data.vaccines.filter(v => v.type === 'paid');
     paidList.innerHTML = paidVaccines.map(v => `
       <div class="compare-item ${this.selectedVaccines.has(v.id) ? 'is-selected' : ''} ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? 'is-disabled' : ''}" data-id="${v.id}">
-        <div class="compare-item-name">${v.name}</div>
-        <div class="compare-item-diseases">${v.diseases.join('、')}</div>
-        <div class="compare-item-price">${this.getPriceLabel(v, true)} · ${v.totalDoses}剂次</div>
-        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? '<div class="compare-item-status">已被替代</div>' : ''}
+        <div class="compare-item-name">${this.getVaccineName(v)}</div>
+        <div class="compare-item-diseases">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
+        <div class="compare-item-price">${this.getPriceLabel(v, true)} · ${v.totalDoses}${this.t('doseCount')}</div>
+        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? `<div class="compare-item-status">${this.t('replacedLong')}</div>` : ''}
       </div>
     `).join('');
 
@@ -500,7 +594,7 @@ class VaccineGuide {
     const categories = [...new Set(this.data.vaccines.map(v => v.category))];
 
     container.innerHTML = `
-      <button class="chip active" data-category="all">全部</button>
+      <button class="chip active" data-category="all">${this.t('allCategory')}</button>
       ${categories.map(cat => `
         <button class="chip" data-category="${cat}">${cat}</button>
       `).join('')}
@@ -540,7 +634,7 @@ class VaccineGuide {
         <tr>
           <td colspan="6">
             <div class="empty-state">
-              <p>没有找到匹配的疫苗</p>
+              <p>${this.t('noResult')}</p>
             </div>
           </td>
         </tr>
@@ -550,18 +644,18 @@ class VaccineGuide {
 
     tbody.innerHTML = vaccines.map(v => {
       const typeClass = v.type === 'free' ? 'free' : 'paid';
-      const typeLabel = v.type === 'free' ? '免费' : '自费';
+      const typeLabel = v.type === 'free' ? this.t('free') : this.t('paid');
       const price = this.getPriceLabel(v, false);
 
       return `
         <tr>
-          <td class="name-cell">${v.name}</td>
+          <td class="name-cell">${this.getVaccineName(v)}</td>
           <td><span class="type-badge ${typeClass}">${typeLabel}</span></td>
-          <td class="diseases-cell">${v.diseases.join('、')}</td>
-          <td>${v.totalDoses}剂</td>
+          <td class="diseases-cell">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</td>
+          <td>${v.totalDoses}${this.t('doseUnit')}</td>
           <td class="price-cell">${price}</td>
           <td class="action-cell">
-            <button class="detail-btn" data-id="${v.id}">详情</button>
+            <button class="detail-btn" data-id="${v.id}">${this.t('detail')}</button>
           </td>
         </tr>
       `;
@@ -594,17 +688,17 @@ class VaccineGuide {
     const modalOverlay = document.getElementById('modalOverlay');
 
     const typeClass = vaccine.type === 'free' ? 'free' : 'paid';
-    const typeLabel = vaccine.type === 'free' ? '免费疫苗' : '自费疫苗';
+    const typeLabel = vaccine.type === 'free' ? this.t('freeVaccine') : this.t('paidVaccine');
     const priceDisplay = this.getPriceLabel(vaccine, false);
     const totalPrice = vaccine.price === null || vaccine.price === undefined
       ? null
-      : `全程${vaccine.totalDoses}剂，约需 ¥${vaccine.price * vaccine.totalDoses}`;
+      : this.t('fullCourse', { doses: vaccine.totalDoses, price: vaccine.price * vaccine.totalDoses });
     const disabledVaccines = this.getDisabledVaccines();
     const isSelected = this.selectedVaccines.has(vaccine.id);
     const isDisabled = !isSelected && disabledVaccines.has(vaccine.id);
     const statusBadge = isSelected
-      ? '<span class="badge badge-selected">已勾选</span>'
-      : (isDisabled ? '<span class="badge badge-disabled">已被替代</span>' : '');
+      ? `<span class="badge badge-selected">${this.t('selected')}</span>`
+      : (isDisabled ? `<span class="badge badge-disabled">${this.t('replacedLong')}</span>` : '');
 
     // Find alternatives
     const alternatives = vaccine.replaces
@@ -613,7 +707,7 @@ class VaccineGuide {
 
     modalContent.innerHTML = `
       <div class="modal-header">
-        <h2 class="modal-title">${vaccine.name}</h2>
+        <h2 class="modal-title">${this.getVaccineName(vaccine)}</h2>
         <p class="modal-subtitle">${vaccine.nameEn}</p>
         <div class="modal-badges">
           <span class="badge ${typeClass}">${typeLabel}</span>
@@ -623,17 +717,17 @@ class VaccineGuide {
       </div>
 
       <div class="modal-section">
-        <h3 class="modal-section-title">预防疾病</h3>
-        <p class="modal-section-content">${vaccine.diseases.join('、')}</p>
+        <h3 class="modal-section-title">${this.t('disease')}</h3>
+        <p class="modal-section-content">${vaccine.diseases.join(this.language === 'en' ? ', ' : '、')}</p>
       </div>
 
       <div class="modal-section">
-        <h3 class="modal-section-title">疫苗说明</h3>
+        <h3 class="modal-section-title">${this.t('intro')}</h3>
         <p class="modal-section-content">${vaccine.description}</p>
       </div>
 
       <div class="modal-section">
-        <h3 class="modal-section-title">接种程序</h3>
+        <h3 class="modal-section-title">${this.t('schedule')}</h3>
         <div class="schedule-list">
           ${vaccine.schedule.map(s => `
             <div class="schedule-item">
@@ -647,19 +741,19 @@ class VaccineGuide {
       </div>
 
       <div class="modal-section">
-        <h3 class="modal-section-title">参考价格</h3>
+        <h3 class="modal-section-title">${this.t('priceTitle')}</h3>
         <div class="modal-price ${typeClass}">${priceDisplay}</div>
         ${vaccine.type === 'paid' && totalPrice ? `<p class="modal-price-note">${totalPrice}</p>` : ''}
       </div>
 
       <div class="modal-section">
-        <h3 class="modal-section-title">不良反应</h3>
+        <h3 class="modal-section-title">${this.t('sideEffects')}</h3>
         <p class="modal-section-content">${vaccine.sideEffects}</p>
       </div>
 
       ${alternatives.length > 0 ? `
         <div class="modal-section">
-          <h3 class="modal-section-title">${vaccine.replaces ? '可替代' : '替代方案'}</h3>
+          <h3 class="modal-section-title">${vaccine.replaces ? this.t('canReplace') : this.t('alternatives')}</h3>
           <div class="alternatives-list">
             ${alternatives.map(a => `
               <span class="alternative-chip" data-id="${a.id}">${a.name}</span>
@@ -669,13 +763,13 @@ class VaccineGuide {
       ` : ''}
 
       <div class="modal-section">
-        <h3 class="modal-section-title">接种建议</h3>
+        <h3 class="modal-section-title">${this.t('recommendation')}</h3>
         <div class="recommendation-box">${vaccine.recommendations}</div>
       </div>
 
       ${vaccine.ageLimit ? `
         <div class="modal-section">
-          <h3 class="modal-section-title">年龄限制</h3>
+          <h3 class="modal-section-title">${this.t('ageLimit')}</h3>
           <p class="modal-section-content" style="color: var(--accent-error);">${vaccine.ageLimit.note}</p>
         </div>
       ` : ''}
