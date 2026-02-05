@@ -287,6 +287,12 @@ body {
   color: #b37400;
 }
 
+.vaccine-card-badge.gender-only {
+  background: #ffe6f2;
+  color: #ad1457;
+}
+
+
 .vaccine-card-diseases {
   font-size: 13px;
   color: var(--foreground-secondary);
@@ -638,6 +644,12 @@ body {
   color: #b37400;
 }
 
+.badge-gender {
+  background: #ffe6f2;
+  color: #ad1457;
+}
+
+
 .compare-divider {
   display: flex;
   align-items: center;
@@ -685,6 +697,14 @@ body {
   font-size: 13px;
   font-weight: 500;
 }
+
+.compare-item-gender {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #ad1457;
+  font-weight: 600;
+}
+
 
 .free-column .compare-item-price {
   color: var(--accent-free);
@@ -873,6 +893,13 @@ body {
   background: var(--accent-paid-light);
   color: #b37400;
 }
+
+.vaccine-table .type-badge.gender-only {
+  margin-left: 6px;
+  background: #ffe6f2;
+  color: #ad1457;
+}
+
 
 .vaccine-table .diseases-cell {
   color: var(--foreground-secondary);

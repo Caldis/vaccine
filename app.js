@@ -15,7 +15,7 @@ const I18N = {
     selectedCount: '已勾选 {selected} 项', replacedCount: ' · 已替代 {disabled} 项', clear: '清空', noResult: '没有找到匹配的疫苗',
     detail: '详情', freeVaccine: '免费疫苗', paidVaccine: '自费疫苗', fullCourse: '全程{doses}剂，约需 ¥{price}', selected: '已勾选',
     replacedLong: '已被替代', disease: '预防疾病', intro: '疫苗说明', schedule: '接种程序', priceTitle: '参考价格', sideEffects: '不良反应',
-    alternatives: '替代方案', canReplace: '可替代', recommendation: '接种建议', ageLimit: '年龄限制'
+    alternatives: '替代方案', canReplace: '可替代', recommendation: '接种建议', ageLimit: '年龄限制', genderLabel: '适用性别', genderFemale: '女性', genderMale: '男性', genderOnlyFemale: '女性专用', genderOnlyMale: '男性专用'
   },
   en: {
     appTitle: 'Childhood Vaccine Guide - Shenzhen Community Health', logoTitle: 'Vaccine Guide', headerBadge: 'Shenzhen CHC', languageLabel: 'Lang',
@@ -32,7 +32,7 @@ const I18N = {
     selectedCount: 'Selected {selected}', replacedCount: ' · Replaced {disabled}', clear: 'Clear', noResult: 'No vaccines matched', detail: 'Details',
     freeVaccine: 'Free vaccine', paidVaccine: 'Paid vaccine', fullCourse: 'Total {doses} doses, about ¥{price}', selected: 'Selected', replacedLong: 'Replaced',
     disease: 'Disease', intro: 'Description', schedule: 'Schedule', priceTitle: 'Price', sideEffects: 'Side effects', alternatives: 'Alternatives',
-    canReplace: 'Can replace', recommendation: 'Recommendation', ageLimit: 'Age limit'
+    canReplace: 'Can replace', recommendation: 'Recommendation', ageLimit: 'Age limit', genderLabel: 'Target gender', genderFemale: 'Female', genderMale: 'Male', genderOnlyFemale: 'Female only', genderOnlyMale: 'Male only'
   }
 };
 
@@ -248,6 +248,19 @@ class VaccineGuide {
     return this.language === 'en' ? (vaccine.nameEn || vaccine.name) : vaccine.name;
   }
 
+
+  getGenderLabel(vaccine) {
+    if (vaccine.gender === 'female') return this.t('genderFemale');
+    if (vaccine.gender === 'male') return this.t('genderMale');
+    return '';
+  }
+
+  getGenderOnlyBadge(vaccine) {
+    if (vaccine.gender === 'female') return this.t('genderOnlyFemale');
+    if (vaccine.gender === 'male') return this.t('genderOnlyMale');
+    return '';
+  }
+
   applyTheme() {
     document.documentElement.setAttribute('data-theme', this.theme);
     const themeToggle = document.getElementById('themeToggle');
@@ -376,12 +389,14 @@ class VaccineGuide {
     const typeClass = vaccine.type === 'free' ? 'free' : 'paid';
     const typeLabel = vaccine.type === 'free' ? this.t('free') : this.t('paid');
     const price = this.getPriceLabel(vaccine, true);
+    const genderOnlyLabel = this.getGenderOnlyBadge(vaccine);
 
     return `
       <div class="vaccine-card ${typeClass}" data-id="${vaccine.id}">
         <div class="vaccine-card-header">
           <span class="vaccine-card-title">${this.getVaccineName(vaccine)}</span>
           <span class="vaccine-card-badge ${typeClass}">${typeLabel}</span>
+          ${genderOnlyLabel ? `<span class="vaccine-card-badge gender-only">${genderOnlyLabel}</span>` : ''}
         </div>
         <div class="vaccine-card-diseases">${vaccine.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
         <div class="vaccine-card-meta">
@@ -554,6 +569,7 @@ class VaccineGuide {
         <div class="compare-item-name">${this.getVaccineName(v)}</div>
         <div class="compare-item-diseases">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
         <div class="compare-item-price">${this.t('free')} · ${v.totalDoses}${this.t('doseCount')}</div>
+        ${this.getGenderOnlyBadge(v) ? `<div class="compare-item-gender">${this.getGenderOnlyBadge(v)}</div>` : ''}
         ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? `<div class="compare-item-status">${this.t('replacedLong')}</div>` : ''}
       </div>
     `).join('');
@@ -565,6 +581,7 @@ class VaccineGuide {
         <div class="compare-item-name">${this.getVaccineName(v)}</div>
         <div class="compare-item-diseases">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</div>
         <div class="compare-item-price">${this.getPriceLabel(v, true)} · ${v.totalDoses}${this.t('doseCount')}</div>
+        ${this.getGenderOnlyBadge(v) ? `<div class="compare-item-gender">${this.getGenderOnlyBadge(v)}</div>` : ''}
         ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? `<div class="compare-item-status">${this.t('replacedLong')}</div>` : ''}
       </div>
     `).join('');
@@ -650,7 +667,10 @@ class VaccineGuide {
       return `
         <tr>
           <td class="name-cell">${this.getVaccineName(v)}</td>
-          <td><span class="type-badge ${typeClass}">${typeLabel}</span></td>
+          <td>
+            <span class="type-badge ${typeClass}">${typeLabel}</span>
+            ${this.getGenderOnlyBadge(v) ? `<span class="type-badge gender-only">${this.getGenderOnlyBadge(v)}</span>` : ''}
+          </td>
           <td class="diseases-cell">${v.diseases.join(this.language === 'en' ? ', ' : '、')}</td>
           <td>${v.totalDoses}${this.t('doseUnit')}</td>
           <td class="price-cell">${price}</td>
@@ -712,6 +732,7 @@ class VaccineGuide {
         <div class="modal-badges">
           <span class="badge ${typeClass}">${typeLabel}</span>
           ${vaccine.note ? `<span class="badge" style="background: var(--accent-success-light); color: #0a8f4d;">${vaccine.note}</span>` : ''}
+          ${vaccine.gender ? `<span class="badge badge-gender">${this.t('genderLabel')}: ${this.getGenderLabel(vaccine)}</span>` : ''}
           ${statusBadge}
         </div>
       </div>
@@ -766,6 +787,13 @@ class VaccineGuide {
         <h3 class="modal-section-title">${this.t('recommendation')}</h3>
         <div class="recommendation-box">${vaccine.recommendations}</div>
       </div>
+
+      ${vaccine.gender ? `
+        <div class="modal-section">
+          <h3 class="modal-section-title">${this.t('genderLabel')}</h3>
+          <p class="modal-section-content">${this.getGenderLabel(vaccine)}</p>
+        </div>
+      ` : ''}
 
       ${vaccine.ageLimit ? `
         <div class="modal-section">

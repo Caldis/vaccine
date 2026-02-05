@@ -812,6 +812,7 @@
         "max": 540,
         "note": "适用于13岁及以上女性"
       },
+      "gender": "female",
       "category": "HPV"
     },
     {
@@ -854,6 +855,7 @@
         "max": 540,
         "note": "适用于9-45岁女性"
       },
+      "gender": "female",
       "category": "HPV"
     },
     {
@@ -898,6 +900,7 @@
         "max": 540,
         "note": "适用于9-45岁女性"
       },
+      "gender": "female",
       "category": "HPV"
     },
     {
