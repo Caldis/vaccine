@@ -61,7 +61,7 @@
     },
     {
       "id": "hepb_cho",
-      "name": "乙肝疫苗(CHO细胞)",
+      "name": "乙肝(CHO细胞)",
       "nameEn": "Hepatitis B (CHO)",
       "type": "paid",
       "diseases": [
@@ -182,7 +182,7 @@
     },
     {
       "id": "dtap_hib",
-      "name": "四联疫苗",
+      "name": "四联疫苗(百白破-Hib)",
       "nameEn": "DTaP-Hib",
       "type": "paid",
       "diseases": [
@@ -226,7 +226,7 @@
     },
     {
       "id": "dtap_ipv_hib",
-      "name": "五联疫苗",
+      "name": "五联疫苗(百白破-脊灰-Hib)",
       "nameEn": "DTaP-IPV-Hib",
       "type": "paid",
       "diseases": [
@@ -315,7 +315,7 @@
     },
     {
       "id": "mmr",
-      "name": "麻腮风疫苗",
+      "name": "麻腮风",
       "nameEn": "MMR",
       "type": "free",
       "diseases": [
@@ -415,7 +415,7 @@
     },
     {
       "id": "hepa_live",
-      "name": "甲肝减毒活疫苗",
+      "name": "甲肝(减毒)",
       "nameEn": "HepA-Live",
       "type": "free",
       "diseases": [
@@ -440,7 +440,7 @@
     },
     {
       "id": "hepa_inact",
-      "name": "甲肝灭活疫苗",
+      "name": "甲肝(灭活)",
       "nameEn": "HepA-Inactivated",
       "type": "paid",
       "diseases": [
@@ -547,7 +547,7 @@
     },
     {
       "id": "pcv13",
-      "name": "13价肺炎球菌疫苗",
+      "name": "13价肺炎球菌结合疫苗",
       "nameEn": "PCV13",
       "type": "paid",
       "diseases": [
@@ -580,7 +580,7 @@
       ],
       "totalDoses": 4,
       "price": 730,
-      "description": "预防13种血清型肺炎球菌引起的侵袭性疾病。肺炎球菌是儿童肺炎、脑膜炎的主要病原体。",
+      "description": "13价肺炎球菌结合疫苗，预防13种血清型肺炎球菌引起的侵袭性疾病。肺炎球菌是儿童肺炎、脑膜炎的主要病原体。",
       "sideEffects": "接种部位红肿、发热、烦躁，通常1-2天消退。",
       "recommendations": "强烈推荐。WHO最优先推荐的疫苗之一，建议6周龄起尽早接种。",
       "alternatives": [],
@@ -615,7 +615,7 @@
     },
     {
       "id": "rv",
-      "name": "轮状病毒疫苗",
+      "name": "5价轮状病毒疫苗",
       "nameEn": "Rotavirus",
       "type": "paid",
       "diseases": [
@@ -640,7 +640,7 @@
       ],
       "totalDoses": 3,
       "price": 314,
-      "description": "预防轮状病毒引起的严重腹泻。轮状病毒是婴幼儿腹泻的主要原因，可导致脱水甚至死亡。",
+      "description": "5价轮状病毒疫苗，预防轮状病毒引起的严重腹泻。轮状病毒是婴幼儿腹泻的主要原因，可导致脱水甚至死亡。",
       "sideEffects": "可能有轻微腹泻、呕吐、发热。",
       "recommendations": "强烈推荐。建议尽早接种，第一剂最晚不超过12周龄，全程在32周龄前完成。",
       "alternatives": [
@@ -708,7 +708,7 @@
     },
     {
       "id": "ev71",
-      "name": "手足口病疫苗",
+      "name": "EV71疫苗(Vero细胞)",
       "nameEn": "EV71",
       "type": "paid",
       "diseases": [
@@ -741,7 +741,7 @@
     },
     {
       "id": "flu",
-      "name": "流感疫苗",
+      "name": "四价流感疫苗（裂解6月龄及以上）",
       "nameEn": "Influenza",
       "type": "paid",
       "diseases": [
@@ -771,7 +771,7 @@
       ],
       "totalDoses": 4,
       "price": 158,
-      "description": "预防季节性流行性感冒。流感可导致肺炎、脑炎等严重并发症，老人和儿童是高危人群。",
+      "description": "四价流感疫苗（裂解6月龄及以上），预防季节性流行性感冒。",
       "sideEffects": "接种部位疼痛、轻微发热。",
       "recommendations": "社康通排苗表显示为6-7月龄完成首年2剂，3岁与4岁加强。",
       "alternatives": [],
