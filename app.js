@@ -6,12 +6,16 @@ class VaccineGuide {
     this.currentTab = 'timeline';
     this.searchQuery = '';
     this.categoryFilter = 'all';
+    this.selectedVaccines = new Set();
+    this.alternativeMap = new Map();
 
     this.init();
   }
 
   async init() {
     await this.loadData();
+    this.buildAlternativeMap();
+    this.loadSelectedVaccines();
     this.bindEvents();
     this.render();
   }
@@ -49,21 +53,12 @@ class VaccineGuide {
   bindEvents() {
     // Age input and slider
     const ageInput = document.getElementById('ageInput');
-    const ageSlider = document.getElementById('ageSlider');
     const maxAge = 162;
 
     ageInput.addEventListener('input', (e) => {
       let value = parseInt(e.target.value) || 0;
       value = Math.max(0, Math.min(maxAge, value));
       this.currentAge = value;
-      ageSlider.value = value;
-      this.updateCurrentVaccines();
-      this.updateTimeline();
-    });
-
-    ageSlider.addEventListener('input', (e) => {
-      this.currentAge = parseInt(e.target.value);
-      ageInput.value = this.currentAge;
       this.updateCurrentVaccines();
       this.updateTimeline();
     });
@@ -88,14 +83,27 @@ class VaccineGuide {
     // Modal
     const modalOverlay = document.getElementById('modalOverlay');
     const modalClose = document.getElementById('modalClose');
+    const ageModalOverlay = document.getElementById('ageModalOverlay');
+    const ageModalClose = document.getElementById('ageModalClose');
+    const ageModalTrigger = document.getElementById('openAgeModal');
 
     modalClose.addEventListener('click', () => this.closeModal());
     modalOverlay.addEventListener('click', (e) => {
       if (e.target === modalOverlay) this.closeModal();
     });
 
+    ageModalClose.addEventListener('click', () => this.closeAgeModal());
+    ageModalOverlay.addEventListener('click', (e) => {
+      if (e.target === ageModalOverlay) this.closeAgeModal();
+    });
+
+    ageModalTrigger.addEventListener('click', () => this.openAgeModal());
+
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') this.closeModal();
+      if (e.key === 'Escape') {
+        this.closeModal();
+        this.closeAgeModal();
+      }
     });
 
     // Load saved age from localStorage
@@ -103,8 +111,61 @@ class VaccineGuide {
     if (savedAge) {
       this.currentAge = parseInt(savedAge);
       ageInput.value = this.currentAge;
-      ageSlider.value = this.currentAge;
     }
+  }
+
+  buildAlternativeMap() {
+    if (!this.data?.vaccines) return;
+
+    this.data.vaccines.forEach(vaccine => {
+      const alternatives = [
+        ...(vaccine.replaces || []),
+        ...(vaccine.alternatives || [])
+      ];
+
+      alternatives.forEach(altId => {
+        if (!this.alternativeMap.has(vaccine.id)) {
+          this.alternativeMap.set(vaccine.id, new Set());
+        }
+        if (!this.alternativeMap.has(altId)) {
+          this.alternativeMap.set(altId, new Set());
+        }
+        this.alternativeMap.get(vaccine.id).add(altId);
+        this.alternativeMap.get(altId).add(vaccine.id);
+      });
+    });
+  }
+
+  loadSelectedVaccines() {
+    const stored = localStorage.getItem('vaccineGuideSelected');
+    if (!stored) return;
+    try {
+      const ids = JSON.parse(stored);
+      if (Array.isArray(ids)) {
+        this.selectedVaccines = new Set(ids);
+      }
+    } catch (error) {
+      console.warn('Failed to parse stored selections', error);
+    }
+  }
+
+  saveSelectedVaccines() {
+    localStorage.setItem('vaccineGuideSelected', JSON.stringify([...this.selectedVaccines]));
+  }
+
+  getDisabledVaccines() {
+    const disabled = new Set();
+    this.selectedVaccines.forEach(id => {
+      const alternatives = this.alternativeMap.get(id);
+      if (alternatives) {
+        alternatives.forEach(altId => {
+          if (!this.selectedVaccines.has(altId)) {
+            disabled.add(altId);
+          }
+        });
+      }
+    });
+    return disabled;
   }
 
   getPriceLabel(vaccine, withUnit = true) {
@@ -243,6 +304,8 @@ class VaccineGuide {
 
   renderTimeline() {
     const container = document.getElementById('timelineView');
+    const disabledVaccines = this.getDisabledVaccines();
+    this.renderSelectionSummary(disabledVaccines);
 
     const html = this.data.ageGuide.map(guide => {
       const isCurrent = guide.ageMonths === this.currentAge;
@@ -274,12 +337,19 @@ class VaccineGuide {
 
               const schedule = v.schedule.find(s => s.ageMonths === guide.ageMonths);
               const doseText = schedule ? `第${schedule.dose}剂` : '';
+              const isSelected = this.selectedVaccines.has(v.id);
+              const isDisabled = !isSelected && disabledVaccines.has(v.id);
+              const statusBadge = isDisabled ? '<span class="disabled-reason">已替代</span>' : '';
 
               return `
-                <span class="timeline-vaccine ${typeClass}" data-id="${v.id}">
-                  ${v.name}
+                <div class="timeline-vaccine ${typeClass} ${isDisabled ? 'is-disabled' : ''} ${isSelected ? 'is-selected' : ''}" data-id="${v.id}">
+                  <input class="vaccine-check" type="checkbox" data-id="${v.id}" ${isSelected ? 'checked' : ''} ${isDisabled ? 'disabled' : ''}>
+                  <button type="button" class="vaccine-detail" data-id="${v.id}">
+                    ${v.name}
+                  </button>
                   ${doseText ? `<span class="dose">${doseText}</span>` : ''}
-                </span>
+                  ${statusBadge}
+                </div>
               `;
             }).join('')}
             ${allVaccines.length === 0 ? '<span style="color: var(--foreground-tertiary); font-size: 13px;">-</span>' : ''}
@@ -291,12 +361,79 @@ class VaccineGuide {
     container.innerHTML = html;
 
     // Bind click events
-    container.querySelectorAll('.timeline-vaccine').forEach(el => {
+    container.querySelectorAll('.vaccine-detail').forEach(el => {
       el.addEventListener('click', () => {
         const vaccineId = el.dataset.id;
         this.openModal(vaccineId);
       });
     });
+
+    container.querySelectorAll('.vaccine-check').forEach(checkbox => {
+      checkbox.addEventListener('change', () => {
+        const vaccineId = checkbox.dataset.id;
+        if (checkbox.checked) {
+          this.selectedVaccines.add(vaccineId);
+        } else {
+          this.selectedVaccines.delete(vaccineId);
+        }
+        this.saveSelectedVaccines();
+        this.renderTimeline();
+        this.renderCompare();
+      });
+    });
+  }
+
+  renderSelectionSummary(disabledVaccines) {
+    const container = document.getElementById('selectionSummary');
+    if (!container) return;
+
+    const selected = [...this.selectedVaccines]
+      .map(id => this.data.vaccines.find(v => v.id === id))
+      .filter(Boolean);
+
+    if (selected.length === 0) {
+      container.innerHTML = `
+        <span class="selection-empty">未勾选任何疫苗</span>
+      `;
+      return;
+    }
+
+    const disabledCount = disabledVaccines.size;
+
+    container.innerHTML = `
+      <div class="selection-chips">
+        ${selected.map(vaccine => `
+          <button class="selection-chip" data-id="${vaccine.id}" type="button">
+            ${vaccine.name}
+            <span aria-hidden="true">×</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="selection-actions">
+        <span class="selection-count">已勾选 ${selected.length} 项${disabledCount ? ` · 已替代 ${disabledCount} 项` : ''}</span>
+        <button class="selection-clear" type="button">清空</button>
+      </div>
+    `;
+
+    container.querySelectorAll('.selection-chip').forEach(chip => {
+      chip.addEventListener('click', () => {
+        const vaccineId = chip.dataset.id;
+        this.selectedVaccines.delete(vaccineId);
+        this.saveSelectedVaccines();
+        this.renderTimeline();
+        this.renderCompare();
+      });
+    });
+
+    const clearButton = container.querySelector('.selection-clear');
+    if (clearButton) {
+      clearButton.addEventListener('click', () => {
+        this.selectedVaccines.clear();
+        this.saveSelectedVaccines();
+        this.renderTimeline();
+        this.renderCompare();
+      });
+    }
   }
 
   updateTimeline() {
@@ -314,24 +451,27 @@ class VaccineGuide {
     const freeList = document.getElementById('freeVaccinesList');
     const paidList = document.getElementById('paidVaccinesList');
     const groupsGrid = document.getElementById('vaccineGroups');
+    const disabledVaccines = this.getDisabledVaccines();
 
     // Free vaccines
     const freeVaccines = this.data.vaccines.filter(v => v.type === 'free');
     freeList.innerHTML = freeVaccines.map(v => `
-      <div class="compare-item" data-id="${v.id}">
+      <div class="compare-item ${this.selectedVaccines.has(v.id) ? 'is-selected' : ''} ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? 'is-disabled' : ''}" data-id="${v.id}">
         <div class="compare-item-name">${v.name}</div>
         <div class="compare-item-diseases">${v.diseases.join('、')}</div>
         <div class="compare-item-price">免费 · ${v.totalDoses}剂次</div>
+        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? '<div class="compare-item-status">已被替代</div>' : ''}
       </div>
     `).join('');
 
     // Paid vaccines
     const paidVaccines = this.data.vaccines.filter(v => v.type === 'paid');
     paidList.innerHTML = paidVaccines.map(v => `
-      <div class="compare-item" data-id="${v.id}">
+      <div class="compare-item ${this.selectedVaccines.has(v.id) ? 'is-selected' : ''} ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? 'is-disabled' : ''}" data-id="${v.id}">
         <div class="compare-item-name">${v.name}</div>
         <div class="compare-item-diseases">${v.diseases.join('、')}</div>
         <div class="compare-item-price">${this.getPriceLabel(v, true)} · ${v.totalDoses}剂次</div>
+        ${!this.selectedVaccines.has(v.id) && disabledVaccines.has(v.id) ? '<div class="compare-item-status">已被替代</div>' : ''}
       </div>
     `).join('');
 
@@ -459,6 +599,12 @@ class VaccineGuide {
     const totalPrice = vaccine.price === null || vaccine.price === undefined
       ? null
       : `全程${vaccine.totalDoses}剂，约需 ¥${vaccine.price * vaccine.totalDoses}`;
+    const disabledVaccines = this.getDisabledVaccines();
+    const isSelected = this.selectedVaccines.has(vaccine.id);
+    const isDisabled = !isSelected && disabledVaccines.has(vaccine.id);
+    const statusBadge = isSelected
+      ? '<span class="badge badge-selected">已勾选</span>'
+      : (isDisabled ? '<span class="badge badge-disabled">已被替代</span>' : '');
 
     // Find alternatives
     const alternatives = vaccine.replaces
@@ -472,6 +618,7 @@ class VaccineGuide {
         <div class="modal-badges">
           <span class="badge ${typeClass}">${typeLabel}</span>
           ${vaccine.note ? `<span class="badge" style="background: var(--accent-success-light); color: #0a8f4d;">${vaccine.note}</span>` : ''}
+          ${statusBadge}
         </div>
       </div>
 
@@ -548,6 +695,20 @@ class VaccineGuide {
   closeModal() {
     const modalOverlay = document.getElementById('modalOverlay');
     modalOverlay.classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  openAgeModal() {
+    const ageModalOverlay = document.getElementById('ageModalOverlay');
+    ageModalOverlay.classList.add('active');
+    document.body.style.overflow = 'hidden';
+    this.updateCurrentVaccines();
+  }
+
+  closeAgeModal() {
+    const ageModalOverlay = document.getElementById('ageModalOverlay');
+    if (!ageModalOverlay.classList.contains('active')) return;
+    ageModalOverlay.classList.remove('active');
     document.body.style.overflow = '';
   }
 }
