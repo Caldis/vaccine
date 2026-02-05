@@ -25,7 +25,7 @@
     },
     {
       "id": "hepb",
-      "name": "乙肝(酿酒酵母)",
+      "name": "乙肝疫苗(酿酒酵母)",
       "nameEn": "Hepatitis B",
       "type": "free",
       "diseases": [
@@ -800,7 +800,7 @@
       ],
       "totalDoses": 2,
       "price": null,
-      "description": "2价HPV疫苗（毕赤酵母），社康通预约平台显示为女生13岁与13岁6个月各1剂。",
+      "description": "社康通预约平台显示为女生13岁与13岁6个月各1剂。",
       "sideEffects": "接种部位疼痛、红肿，少数有发热。",
       "recommendations": "建议在首次性行为前完成接种。",
       "alternatives": [
