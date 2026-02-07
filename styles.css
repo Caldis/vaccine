@@ -931,6 +931,64 @@ body {
   border-color: var(--foreground);
 }
 
+/* National Schedule */
+.national-container {
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+}
+
+.national-header {
+  margin-bottom: 16px;
+}
+
+.national-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.national-header p {
+  font-size: 13px;
+  color: var(--foreground-secondary);
+}
+
+.national-table-container {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.national-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.national-table th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 500;
+  color: var(--foreground-secondary);
+  background: var(--background-secondary);
+  border-bottom: 1px solid var(--border);
+}
+
+.national-table td {
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.national-table tr:last-child td {
+  border-bottom: none;
+}
+
+.national-table tr:hover td {
+  background: var(--background-secondary);
+}
+
 /* Tips Section */
 .tips-section {
   max-width: 1200px;
@@ -1297,6 +1355,14 @@ body {
 
   .vaccine-table {
     min-width: 600px;
+  }
+
+  .national-table-container {
+    overflow-x: auto;
+  }
+
+  .national-table {
+    min-width: 720px;
   }
 
   .timeline-age {
