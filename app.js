@@ -4,9 +4,13 @@ const I18N = {
     appTitle: '儿童疫苗接种指南 - 深圳社康', logoTitle: '疫苗接种指南', headerBadge: '深圳社康', languageLabel: '语言',
     themeToggleDark: '暗黑模式', themeToggleLight: '浅色模式', heroTitle: '宝宝该打什么疫苗？', heroSubtitle: '按月龄查看推荐接种项，快速找到当月重点疫苗',
     heroButton: '查看月龄推荐', tabTimeline: '接种时间轴', tabCompare: '免费 vs 自费', tabAll: '全部疫苗',
+    tabNational: '国家免疫规划',
     legendFree: '免费疫苗', legendPaid: '自费推荐', legendOptional: '可选', compareFree: '免费疫苗', compareFreeBadge: '国家免疫规划',
     comparePaid: '自费疫苗', comparePaidBadge: '自愿接种', groupsTitle: '替代关系对比', searchPlaceholder: '搜索疫苗名称或预防疾病...',
     allCategory: '全部', thName: '疫苗名称', thType: '类型', thDisease: '预防疾病', thDose: '接种剂次', thPrice: '参考价格',
+    nationalTitle: '国家免疫规划疫苗接种程序（2021版）', nationalSubtitle: '整理自国家免疫规划儿童免疫程序表',
+    thNationalVaccine: '疫苗种类', thNationalAbbrev: '英文缩写', thNationalDisease: '可预防疾病', thNationalRoute: '接种途径',
+    thNationalDose: '剂量', thNationalSchedule: '接种年龄/剂次',
     tipsTitle: '接种小贴士', footerDisclaimer: '本页面信息仅供参考，具体接种方案请咨询当地社康中心或医生。<br>数据来源：深圳市卫健委、广东省非免疫规划疫苗接种方案（2024版）、国家免疫规划疫苗儿童免疫程序（2021版）',
     linkShenzhen: '深圳卫健委', linkCdc: '中国疾控中心', ageModalTitle: '月龄推荐', ageModalSubtitle: '输入宝宝月龄，查看当月应接种疫苗',
     agePlaceholder: '月龄', ageUnit: '月龄', currentSectionTitle: '当前应接种', loadError: '无法加载疫苗数据，请确保 data/vaccines.json 文件存在',
@@ -20,10 +24,13 @@ const I18N = {
   en: {
     appTitle: 'Childhood Vaccine Guide - Shenzhen Community Health', logoTitle: 'Vaccine Guide', headerBadge: 'Shenzhen CHC', languageLabel: 'Lang',
     themeToggleDark: 'Dark', themeToggleLight: 'Light', heroTitle: 'What vaccine should my child get?', heroSubtitle: 'Check recommended vaccines by age in months.',
-    heroButton: 'View age guidance', tabTimeline: 'Timeline', tabCompare: 'Free vs Paid', tabAll: 'All Vaccines',
+    heroButton: 'View age guidance', tabTimeline: 'Timeline', tabCompare: 'Free vs Paid', tabAll: 'All Vaccines', tabNational: 'National schedule',
     legendFree: 'Free', legendPaid: 'Paid recommended', legendOptional: 'Optional', compareFree: 'Free Vaccines', compareFreeBadge: 'National Program',
     comparePaid: 'Paid Vaccines', comparePaidBadge: 'Voluntary', groupsTitle: 'Alternative comparison', searchPlaceholder: 'Search vaccine name or disease...',
     allCategory: 'All', thName: 'Vaccine', thType: 'Type', thDisease: 'Disease', thDose: 'Doses', thPrice: 'Price', tipsTitle: 'Tips',
+    nationalTitle: 'National Immunization Schedule (2021)', nationalSubtitle: 'Compiled from the national childhood immunization table',
+    thNationalVaccine: 'Vaccine', thNationalAbbrev: 'Abbrev', thNationalDisease: 'Disease', thNationalRoute: 'Route',
+    thNationalDose: 'Dose', thNationalSchedule: 'Schedule',
     footerDisclaimer: 'This page is for reference only. Please consult your local clinic or doctor for vaccination plans.<br>Sources: Shenzhen Health Commission and national schedules.',
     linkShenzhen: 'Shenzhen Health', linkCdc: 'China CDC', ageModalTitle: 'Age Guidance', ageModalSubtitle: 'Enter age in months to view recommended vaccines',
     agePlaceholder: 'Months', ageUnit: 'months', currentSectionTitle: 'Recommended now', loadError: 'Failed to load data. Please ensure data/vaccines.json exists.',
@@ -248,6 +255,16 @@ class VaccineGuide {
     return this.language === 'en' ? (vaccine.nameEn || vaccine.name) : vaccine.name;
   }
 
+  getNationalName(item) {
+    return this.language === 'en' ? (item.nameEn || item.name) : item.name;
+  }
+
+  getNationalDiseases(item) {
+    const list = item.diseases || [];
+    const separator = this.language === 'en' ? ', ' : '、';
+    return list.join(separator);
+  }
+
 
   getGenderLabel(vaccine) {
     if (vaccine.gender === 'female') return this.t('genderFemale');
@@ -307,6 +324,7 @@ class VaccineGuide {
     this.renderTimeline();
     this.renderCompare();
     this.renderAllVaccines();
+    this.renderNationalSchedule();
     this.renderTips();
     this.renderCategoryFilters();
   }
@@ -687,6 +705,32 @@ class VaccineGuide {
         this.openModal(btn.dataset.id);
       });
     });
+  }
+
+  renderNationalSchedule() {
+    const container = document.getElementById('nationalScheduleBody');
+    if (!container) return;
+
+    const items = this.data?.nationalSchedule || [];
+    container.innerHTML = items.map(item => {
+      const scheduleText = (item.schedule || []).map(entry => {
+        const ageLabel = entry.ageLabel || this.getAgeLabel(entry.ageMonths);
+        const doseText = entry.dose ? this.t('doseNo', { n: entry.dose }) : '';
+        const noteText = entry.note ? `(${entry.note})` : '';
+        return `${ageLabel}${doseText ? ` ${doseText}` : ''}${noteText}`;
+      }).join(this.language === 'en' ? '; ' : '、');
+
+      return `
+        <tr>
+          <td>${this.getNationalName(item)}</td>
+          <td>${item.abbrev || '-'}</td>
+          <td>${this.getNationalDiseases(item)}</td>
+          <td>${item.route || '-'}</td>
+          <td>${item.dose || '-'}</td>
+          <td>${scheduleText || '-'}</td>
+        </tr>
+      `;
+    }).join('');
   }
 
   renderTips() {

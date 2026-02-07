@@ -60,6 +60,15 @@
         </svg>
         <span data-i18n="tabCompare">免费 vs 自费</span>
       </button>
+      <button class="tab" data-tab="national">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M3 4h18v16H3z"/>
+          <path d="M7 8h10"/>
+          <path d="M7 12h10"/>
+          <path d="M7 16h10"/>
+        </svg>
+        <span data-i18n="tabNational">国家免疫规划</span>
+      </button>
       <button class="tab" data-tab="all">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <line x1="8" y1="6" x2="21" y2="6"/>
@@ -110,6 +119,30 @@
         <div class="groups-section">
           <h3 data-i18n="groupsTitle">替代关系对比</h3>
           <div class="groups-grid" id="vaccineGroups"></div>
+        </div>
+      </section>
+
+      <section class="tab-content" id="national">
+        <div class="national-container">
+          <div class="national-header">
+            <h3 data-i18n="nationalTitle">国家免疫规划疫苗接种程序（2021版）</h3>
+            <p data-i18n="nationalSubtitle">整理自国家免疫规划儿童免疫程序表</p>
+          </div>
+          <div class="national-table-container">
+            <table class="national-table">
+              <thead>
+                <tr>
+                  <th data-i18n="thNationalVaccine">疫苗种类</th>
+                  <th data-i18n="thNationalAbbrev">英文缩写</th>
+                  <th data-i18n="thNationalDisease">可预防疾病</th>
+                  <th data-i18n="thNationalRoute">接种途径</th>
+                  <th data-i18n="thNationalDose">剂量</th>
+                  <th data-i18n="thNationalSchedule">接种年龄/剂次</th>
+                </tr>
+              </thead>
+              <tbody id="nationalScheduleBody"></tbody>
+            </table>
+          </div>
         </div>
       </section>
 
